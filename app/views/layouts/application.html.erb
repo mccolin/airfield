@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Airfield</title>
+  <title>Colin McCloskey</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <header id="header-container">
+    <div id="mast-photos"></div>
+    <div id="header">
+      <h2>Bearded computery nerd person.</h2><br/>
+      <h1>Colin McCloskey</h1>
+    </div> <!--/#header-->
+    <div id="navigation-container">
+      <ul id="navigation">
+        <% @pages.each do |page| %>
+          <%= site_page_navigation_item(page.name, page_path(page)) %>
+        <% end # pages %>
+      </ul>
+    </div> <!--/#navigation-container-->
+    <div class="clearfix"></div>
+  </header>
+
+  <div id="content">
+    <%= yield %>
+  </div>
+
+  <footer id="footer-container">
+    <div id="footer">
+      &copy; 2012 Colin McCloskey
+    </div>
+  </footer>
 
 </body>
 </html>

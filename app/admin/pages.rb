@@ -19,4 +19,7 @@ ActiveAdmin.register Page do
     default_actions
   end
 
+  # Customize the Form
+  form :partial=>"form"
+
 end

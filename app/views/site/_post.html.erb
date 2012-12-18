@@ -3,8 +3,17 @@
   # Post Partial -- Render a post in an archive/list view
 -%>
 
-<article id="post-<%=post.id%>" class="post-wrapper">
-  <h2><%= post.name %></h2>
-  <%= render_markdown(post.content) %>
+<article id="post-<%=post.id%>" class="post">
+  <aside class="post-aside">
+    <span class="month"><%= post.published_at.strftime("%b") %></span><br/>
+    <span class="day"><%= post.published_at.strftime("%d") %></span><br/>
+    <span class="year"><%= post.published_at.strftime("%Y") %></span><br/>
+    <!-- TODO: Tags, Labels -->
+  </aside>
+  <section class="post-content">
+    <h1><%= post.name %></h1>
+    <%= render_markdown(post.content) %>
+    <!-- TODO: Comments, Permalink -->
+  </section>
 </article>
 

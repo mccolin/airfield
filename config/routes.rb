@@ -8,4 +8,8 @@ Airfield::Application.routes.draw do
 
   root :to=>"site#index", :as=>"home"
 
+  # TODO: Replace with more resourceful routing
+  get "page/:id" => "site#page", :as=>"page"
+  get "post/:id" => "site#post", :as=>"post"
+
 end

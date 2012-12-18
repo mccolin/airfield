@@ -1,3 +1,128 @@
-// Place all the styles related to the Site controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// AIRFIELD
+// Site CSS -- Sass/SCSS rules for site display
+
+.clearfix { clear: both; }
+
+body {
+  background: #FFF;
+  color: #555;
+  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+}
+
+#header-container {
+  background: #252525;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#header {
+  margin: auto;
+  width: 960px;
+}
+
+#header h1 {
+  background: rgba(255,204,15,0.7);  // #FFD700
+  border-radius: 5px;
+  display: inline-block;
+  letter-spacing: -3px;
+  margin: 0 25px 25px 25px;
+  padding: 20px 10px;
+}
+#header h2 {
+  color: #FFF;
+  display: inline-block;
+  font-weight: 100;
+  letter-spacing: -1px;
+  margin: 125px 25px 25px 25px;
+  text-shadow: 2px 2px 2px #666;
+}
+
+
+#navigation-container {
+  background: #efefef;
+  background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#dfe1e2));
+  background: -moz-linear-gradient(-90deg, #efefef, #dfe1e2);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
+  border-bottom: 1px solid #666;
+  text-shadow: #FFF 0 1px 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+ul#navigation {
+  list-style: none;
+  margin: auto;
+  padding: 0.5em 0;
+  width: 960px;
+}
+ul#navigation li {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+
+#content {
+  margin: 2em auto;
+  width: 960px;
+}
+
+#footer-container {
+  background: #333;
+  clear: both;
+  margin: 3em 0 0;
+  width: 100%;
+}
+#footer {
+  color: #CFCFCF;
+  font-size: 0.8rem;
+  font-weight: lighter;
+  margin: auto;
+  padding: 25px 0;
+  width: 960px;
+}
+
+
+//
+// POST DESIGN
+//
+
+.post {
+  clear: both;
+  float: left;
+  margin-bottom: 2em;
+  padding-left: 75px;
+  position: relative;
+  width: 80%;
+}
+.post .post-aside {
+  border-right: 1px solid #CCC;
+  margin-right: 0.5em;
+  padding: 1em 0 0;
+  position: absolute;
+  text-align: center;
+  width: 50px;
+  height: 100%;
+}
+.post .post-content {
+  float: left;
+  margin-left: 60px;
+}
+.post .post-aside .month {
+  font-size: 0.8rem;
+  font-weight: lighter;
+  text-transform: uppercase;
+}
+.post .post-aside .day {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+.post .post-aside .year {
+  font-size: 0.8rem;
+  font-weight: lighter;
+}
