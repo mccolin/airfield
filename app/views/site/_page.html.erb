@@ -1,0 +1,10 @@
+<%
+  # AIRFIELD
+  # Page Partial -- Render a page in archive/list view
+-%>
+
+<article id="page-<%=page.id%>" class="page">
+  <h1><%= page.name %></h1>
+  <%= render_markdown(page.content) %>
+</article>
+

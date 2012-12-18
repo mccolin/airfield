@@ -3,9 +3,11 @@
 
 class SiteController < ApplicationController
 
+  before_filter :preload_pages
+
+
   # Site Homepage
   def index
-    @pages = Page.order(:name).all() # published()
     @posts = Post.order("created_at DESC").all() # published()
   end
 
@@ -17,6 +19,12 @@ class SiteController < ApplicationController
   # View a static post
   def post
     @post = Post.where(:id=>params[:id]).first()
+  end
+
+
+  # Load pages for navigation and archive purposes for all site queries:
+  def preload_pages
+    @pages = Page.order(:name).all() # published()
   end
 
 end
