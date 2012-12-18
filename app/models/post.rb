@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
 
   # Scopes:
   scope :published, where(["published_at != ?", nil])
+  scope :unpublished, where(:published_at=>nil)
 
   # Attributes:
   attr_accessible :author_id, :content, :name, :page_id, :position, :properties, :type

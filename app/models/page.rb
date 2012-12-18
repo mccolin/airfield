@@ -8,6 +8,7 @@ class Page < ActiveRecord::Base
 
   # Scopes:
   scope :published, where(["published_at != ?", nil])
+  scope :unpublished, where(:published_at=>nil)
 
   # Attributes:
   attr_accessible :author_id, :content, :name, :parent_id, :position, :properties, :type
