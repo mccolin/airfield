@@ -1,0 +1,18 @@
+# TINY MCE CONFIGURATION
+# Follow instructions for tinymce-rails gem configuration
+# https://github.com/spohlenz/tinymce-rails
+
+default:
+  theme_advanced_toolbar_align: left
+  theme_advanced_buttons3_add:
+    - tablecontrols
+  plugins:
+    - table
+
+alternate:
+  theme_advanced_toolbar_location: top
+  theme_advanced_toolbar_align: left
+  theme_advanced_buttons3_add:
+    - tablecontrols
+  plugins:
+    - table
