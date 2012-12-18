@@ -9,7 +9,7 @@
   <%= f.inputs do %>
     <%= f.input :name, :hint=>"The displayed headline/title of the post" %>
     <%= f.input :author, :selected=>current_user %>
-    <%= f.input :content, :input_html=>{:class=>"tinymce"} %>
+    <%= f.input :content, :input_html=>{:class=>"markdown"} %>
   <% end # f.inputs %>
   <%= f.actions do %>
     <%= f.action :submit, :label=>"Save Post" %>
@@ -17,4 +17,3 @@
   <% end # f.actions %>
 <% end %>
 
-<%= tinymce %>

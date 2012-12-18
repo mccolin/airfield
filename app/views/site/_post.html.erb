@@ -5,6 +5,6 @@
 
 <article id="post-<%=post.id%>" class="post-wrapper">
   <h2><%= post.name %></h2>
-  <%= post.content.html_safe %>
+  <%= render_markdown(post.content) %>
 </article>
 

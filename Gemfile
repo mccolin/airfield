@@ -29,4 +29,5 @@ gem "jquery-rails"
 gem "activeadmin", "~> 0.5.1"
 gem "sass-rails", "~> 3.2.3"
 gem "doeskeyvalue", :path=>"/Users/colin/git/awexome/doeskeyvalue"    # Pre-release
-gem "tinymce-rails", "~> 3.5.8"
+gem "tinymce-rails", "~> 3.5.8"     # Replaced by Markdown or options?
+gem "redcarpet", "~> 2.2.2"
