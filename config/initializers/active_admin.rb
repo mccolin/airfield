@@ -1,3 +1,7 @@
+# AIRFIELD
+# ActiveAdmin Configuration and Customization
+
+# Configuration:
 ActiveAdmin.setup do |config|
 
   # == Site Title
@@ -10,7 +14,7 @@ ActiveAdmin.setup do |config|
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  # config.site_title_link = "/"
+  config.site_title_link = "/"
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
@@ -55,7 +59,8 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the controller.
-  config.authentication_method = :authenticate_user!
+  #config.authentication_method = :authenticate_user!
+  config.authentication_method = :authenticate_admin_user!
 
 
   # == Current User
@@ -126,6 +131,15 @@ ActiveAdmin.setup do |config|
   # config.before_filter :do_something_awesome
 
 
+  # == Footer Customization
+  #
+  # You can specify custom view factory builders for specific components
+  # of the Active Admin interface.
+  #
+  # config.view_factory.footer = MyFooter
+
+
+
   # == Register Stylesheets & Javascripts
   #
   # We recommend using the built in Active Admin layout and loading
@@ -150,3 +164,6 @@ ActiveAdmin.setup do |config|
   # Set the CSV builder options (default is {})
   # config.csv_options = {}
 end
+
+
+

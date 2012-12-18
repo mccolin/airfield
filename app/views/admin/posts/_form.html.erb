@@ -1,0 +1,20 @@
+<%
+  # AIRFIELD
+  # Admin / Post Form
+-%>
+
+<%= tinymce_assets %>
+
+<%= semantic_form_for [:admin, @post] do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :name, :hint=>"The displayed headline/title of the post" %>
+    <%= f.input :author, :selected=>current_user %>
+    <%= f.input :content, :input_html=>{:class=>"tinymce"} %>
+  <% end # f.inputs %>
+  <%= f.actions do %>
+    <%= f.action :submit, :label=>"Save Post" %>
+    <%= f.action :cancel, :as=>:link, :label=>"Cancel" %>
+  <% end # f.actions %>
+<% end %>
+
+<%= tinymce %>

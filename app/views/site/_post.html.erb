@@ -1,0 +1,10 @@
+<%
+  # AIRFIELD
+  # Post Partial -- Render a post in an archive/list view
+-%>
+
+<article id="post-<%=post.id%>" class="post-wrapper">
+  <h2><%= post.name %></h2>
+  <%= post.content.html_safe %>
+</article>
+
