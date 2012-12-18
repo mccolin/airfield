@@ -13,4 +13,14 @@ class Page < ActiveRecord::Base
   # Attributes:
   attr_accessible :author_id, :content, :name, :parent_id, :position, :properties, :type
 
+  # Key-Value Properties:
+  does_keys :column=>"properties"
+  #has_key :foo, :type=>:boolean
+  #has_key :bar, :type=>:integer
+
+
+  def published?
+    !published_at.nil? && published_at < DateTime.now
+  end
+
 end
