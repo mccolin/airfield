@@ -11,7 +11,7 @@ class Page < ActiveRecord::Base
   scope :unpublished, where(:published_at=>nil)
 
   # Attributes:
-  attr_accessible :author_id, :content, :name, :parent_id, :position, :properties, :type, :published_at
+  attr_accessible :author_id, :content, :format, :name, :parent_id, :position, :properties, :type, :published_at
 
   # Key-Value Properties:
   does_keys :column=>"properties"
