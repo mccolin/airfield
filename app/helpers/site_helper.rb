@@ -20,4 +20,18 @@ module SiteHelper
     end
   end
 
+  # Powered by attribution string
+  def powered_by
+    powers = %Q(
+      Diet Pepsi
+      the funny voice he uses to talk to dogs
+      the love of his life, <a href=\"http://thebluesunshine.com/\">Lizza</a>
+      Cliff Lee's throwing motion
+      his sweet tooth for Nerds rope
+      any and all types of potatoes
+      WaWa Hot to Go bowls, however gross they seem
+    ).split("\n")
+    powers[rand(powers.length)].html_safe
+  end
+
 end
