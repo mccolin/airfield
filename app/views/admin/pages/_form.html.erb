@@ -6,7 +6,8 @@
 <%= semantic_form_for [:admin, @page] do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, :hint=>"The displayed headline/title of the page" %>
-    <%= f.input :author, :value=>current_user.id %>
+    <%= f.input :author %>
+    <%= f.input :format, :as=>:select, :collection=>%w(html markdown) %>
     <%= f.input :content, :input_html=>{:class=>"markdown"} %>
   <% end # f.inputs %>
   <%= f.actions do %>

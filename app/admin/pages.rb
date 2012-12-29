@@ -13,6 +13,7 @@ ActiveAdmin.register Page do
     selectable_column
     column :id
     column :name
+    column :format
     column :author
     column :created_at
     column :published_at
