@@ -20,18 +20,31 @@ module SiteHelper
     end
   end
 
+  # Select and sanitize a random string from a set
+  def random_and_sane(set)
+    set[rand(set.length)].html_safe
+  end
+
+  # Subtitle string
+  def subtitle
+    random_and_sane [
+      "Bearded computery nerd person.",
+      "Hero. Husband. Ham-lover.",
+      "Trained nerd and things enthusiast"
+    ]
+  end
+
   # Powered by attribution string
   def powered_by
-    powers = %Q(
-      Diet Pepsi
-      the funny voice he uses to talk to dogs
-      the love of his life, <a href=\"http://thebluesunshine.com/\">Lizza</a>
-      Cliff Lee's throwing motion
-      his sweet tooth for Nerds rope
-      any and all types of potatoes
-      WaWa Hot to Go bowls, however gross they seem
-    ).split("\n")
-    powers[rand(powers.length)].html_safe
+    random_and_sane [
+      "Diet Pepsi",
+      "the funny voice he uses to talk to dogs",
+      "the love of his life, <a href=\"http://thebluesunshine.com/\">Lizza</a>",
+      "Cliff Lee's throwing motion",
+      "his sweet tooth for Nerds rope",
+      "any and all types of potatoes",
+      "WaWa Hot to Go bowls, however gross they seem"
+    ]
   end
 
 end
