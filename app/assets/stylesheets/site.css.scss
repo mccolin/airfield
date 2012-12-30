@@ -48,23 +48,21 @@ body {
 }
 
 
+//
+// NAVIGATION
+//
+
 #navigation-container {
-  // background: #efefef;
-  // background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#dfe1e2));
-  // background: -moz-linear-gradient(-90deg, #efefef, #dfe1e2);
-  // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
-  // -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
-  // border-bottom: 1px solid #666;
-  // text-shadow: #FFF 0 1px 0;
-
   background: #000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#000), to(#333));
+  background: -moz-linear-gradient(-90deg, #000, #333);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000', endColorstr='#333');
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000', endColorstr='#333');
   color: #FFF;
-
   width: 100%;
   margin: 0;
   padding: 0;
 }
-
 ul#navigation {
   list-style: none;
   margin: auto;
@@ -88,13 +86,11 @@ ul#navigation li.active, ul#navigation li.active:hover {
   -moz-transform: scale(1.15);
 }
 ul#navigation li:hover {
-  background: #000;
   color: #FFD700;
 }
 ul#navigation li:hover a {
   color: #FFD700;
 }
-
 ul#navigation li a {
   color: #FFF;
   text-decoration: none;
@@ -103,6 +99,31 @@ ul#navigation li.active a {
   color: #000;
 }
 
+ul#footer-navigation {
+  list-style: none;
+  margin: 0 0 2em;
+  padding: 0;
+}
+ul#footer-navigation li {
+  display: inline-block;
+  padding: 0.5em 0.25em;
+}
+ul#footer-navigation li a {
+  color: #0F6;
+  text-decoration: none;
+}
+ul#footer-navigation li:hover a {
+  color: #FFD700;
+  text-decoration: underline;
+}
+ul#footer-navigation li.active {
+  font-weight: bold;
+}
+
+
+//
+// CONTENT
+//
 
 #content {
   line-height: 30px;
@@ -110,8 +131,22 @@ ul#navigation li.active a {
   width: 960px;
 }
 
+#content article {
+  width: 80%;
+}
+
+
+//
+// FOOTER
+//
+
 #footer-container {
-  background: #333;
+  background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#222));
+  background: -moz-linear-gradient(-90deg, #444, #222);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444', endColorstr='#222');
+  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444', endColorstr='#222');
+
+  //background: #333;
   clear: both;
   margin: 3em 0 0;
   width: 100%;
@@ -123,6 +158,14 @@ ul#navigation li.active a {
   margin: auto;
   padding: 25px 0;
   width: 960px;
+}
+
+#footer a {
+  color: #FFD700;
+  text-decoration: none;
+}
+#footer a:hover {
+  text-decoration: underline;
 }
 
 
