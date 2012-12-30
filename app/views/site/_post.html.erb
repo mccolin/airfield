@@ -1,9 +1,12 @@
 <%
   # AIRFIELD
   # Post Partial -- Render a post in an archive/list view
+
+  # Preset the post-counter:
+  post_counter ||= nil
 -%>
 
-<article id="post-<%=post.id%>" class="post">
+<article id="post-<%=post.id%>" class="post <%=cycle("even", "odd")%> <%= post_counter ? "in_set" : "solo" %>">
   <aside class="post-aside">
     <span class="month"><%= post.published_at.strftime("%b") %></span><br/>
     <span class="day"><%= post.published_at.strftime("%d") %></span><br/>
@@ -11,9 +14,13 @@
     <!-- TODO: Tags, Labels -->
   </aside>
   <section class="post-content">
-    <h1><%= post.name %></h1>
+    <% if post_counter %>
+      <h1><%=link_to post.name, post_path(post) %></h1>
+    <% else %>
+      <h1><%= post.name %></h1>
+    <% end %>
     <%= render_markdown(post.content) %>
-    <!-- TODO: Comments, Permalink -->
+    <!-- TODO: Comments -->
   </section>
 </article>
 
