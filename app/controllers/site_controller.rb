@@ -38,7 +38,7 @@ class SiteController < ApplicationController
 
   # Load pages for navigation and archive purposes for all site queries:
   def preload_pages
-    @pages = Page.order(:name).all() # published()
+    @pages = Page.order(:position).order(:name).all() # published()
   end
 
 end

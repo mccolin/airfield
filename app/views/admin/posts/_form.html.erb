@@ -8,8 +8,9 @@
 <%= semantic_form_for [:admin, @post] do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, :hint=>"The displayed headline/title of the post" %>
-    <%= f.input :author %>
-    <%= f.input :format, :as=>:select, :collection=>%w(html markdown) %>
+    <%= f.input :author, :hint=>"The author of record for this page" %>
+    <%= f.input :published_at, :hint=>"Sort date and display date for pre- or post-publishing" %>
+    <%= f.input :format, :as=>:select, :collection=>%w(html markdown), :hint=>"Airfield will support embedded HTML or Markdown formats" %>
     <%= f.input :content, :input_html=>{:class=>"markdown"} %>
   <% end # f.inputs %>
   <%= f.actions do %>

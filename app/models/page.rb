@@ -5,6 +5,8 @@ class Page < ActiveRecord::Base
 
   # Relationships:
   belongs_to :author, :class_name=>"User"
+  belongs_to :parent, :class_name=>"Page"
+  has_many :children, :class_name=>"Page", :foreign_key=>"parent_id"
 
   # Scopes:
   scope :published, where(["published_at != ?", nil])

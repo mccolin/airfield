@@ -20,6 +20,25 @@ ActiveAdmin.register Page do
     default_actions
   end
 
+  # Customize the Show view
+  show do
+    attributes_table do
+      row :id
+      row :name
+      row :slug
+      row :parent
+      row :format
+      row :created_at
+      row :published_at
+      row :updated_at
+    end
+    panel "Body Content" do
+      div(:style=>"padding:10px; margin: 1em 2em;") do
+        render_markdown(page.content)
+      end
+    end
+  end
+
   # Customize the Form
   form :partial=>"form"
 

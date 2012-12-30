@@ -6,8 +6,9 @@
 <%= semantic_form_for [:admin, @page] do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, :hint=>"The displayed headline/title of the page" %>
-    <%= f.input :author %>
-    <%= f.input :format, :as=>:select, :collection=>%w(html markdown) %>
+    <%= f.input :parent, :hint=>"This page's parent page in navigation and site map (select none for top-level pages)" %>
+    <%= f.input :author, :hint=>"The author of record for this page" %>
+    <%= f.input :format, :as=>:select, :collection=>%w(html markdown), :hint=>"Airfield will support embedded HTML or Markdown formats" %>
     <%= f.input :content, :input_html=>{:class=>"markdown"} %>
   <% end # f.inputs %>
   <%= f.actions do %>
