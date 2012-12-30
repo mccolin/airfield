@@ -13,12 +13,12 @@ class SiteController < ApplicationController
 
   # View a static page
   def page
-    @page = Page.where(:id=>params[:id]).first()
+    @page = Page.find_by_slug(params[:id]) || Page.where(:id=>params[:id]).first()
   end
 
   # View a static post
   def post
-    @post = Post.where(:id=>params[:id]).first()
+    @post = Post.find_by_slug(params[:id]) || Post.where(:id=>params[:id]).first()
   end
 
 

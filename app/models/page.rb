@@ -18,9 +18,18 @@ class Page < ActiveRecord::Base
   #has_key :foo, :type=>:boolean
   #has_key :bar, :type=>:integer
 
+  # URL-parsing by slug:
+  acts_as_url :name, :url_attribute=>:slug, :sync_url=>true
+
 
   def published?
     !published_at.nil? && published_at < DateTime.now
+  end
+
+
+  # Sluggable URLs:
+  def to_param
+    slug
   end
 
 end

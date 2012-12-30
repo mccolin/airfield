@@ -23,4 +23,9 @@ ActiveAdmin.register Page do
   # Customize the Form
   form :partial=>"form"
 
+  # Customize the controller:
+  controller do
+    defaults :finder => :find_by_slug
+  end
+
 end
