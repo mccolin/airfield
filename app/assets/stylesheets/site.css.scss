@@ -29,6 +29,9 @@ body {
 
 #header h1 {
   background: rgba(255,204,15,0.7);  // #FFD700
+  // background: rgba(15,180,80,0.7);  // #FFD700
+  color: #111;
+
   border-radius: 5px;
   display: inline-block;
   letter-spacing: -2px;
@@ -46,13 +49,17 @@ body {
 
 
 #navigation-container {
-  background: #efefef;
-  background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#dfe1e2));
-  background: -moz-linear-gradient(-90deg, #efefef, #dfe1e2);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
-  -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
-  border-bottom: 1px solid #666;
-  text-shadow: #FFF 0 1px 0;
+  // background: #efefef;
+  // background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#dfe1e2));
+  // background: -moz-linear-gradient(-90deg, #efefef, #dfe1e2);
+  // filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
+  // -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efefef', endColorstr='#dfe1e2');
+  // border-bottom: 1px solid #666;
+  // text-shadow: #FFF 0 1px 0;
+
+  background: #000;
+  color: #FFF;
+
   width: 100%;
   margin: 0;
   padding: 0;
@@ -61,16 +68,44 @@ body {
 ul#navigation {
   list-style: none;
   margin: auto;
-  padding: 0.5em 0;
+  padding: 0;
   width: 960px;
 }
 ul#navigation li {
+  border: 1px solid transparent;
   display: inline-block;
   margin-right: 0.5em;
+  padding: 0.5em 5px;
+}
+ul#navigation li.active, ul#navigation li.active:hover {
+  background: #FFF;
+  border: 1px solid #333;
+  border-radius: 0.25em;
+  box-shadow: 0 0 3px #333;
+  color: #333;
+  font-weight: bold;
+  -webkit-transform: scale(1.15);
+  -moz-transform: scale(1.15);
+}
+ul#navigation li:hover {
+  background: #000;
+  color: #FFD700;
+}
+ul#navigation li:hover a {
+  color: #FFD700;
+}
+
+ul#navigation li a {
+  color: #FFF;
+  text-decoration: none;
+}
+ul#navigation li.active a {
+  color: #000;
 }
 
 
 #content {
+  line-height: 30px;
   margin: 2em auto;
   width: 960px;
 }
