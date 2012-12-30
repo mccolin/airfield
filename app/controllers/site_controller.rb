@@ -14,11 +14,25 @@ class SiteController < ApplicationController
   # View a static page
   def page
     @page = Page.find_by_slug(params[:id]) || Page.where(:id=>params[:id]).first()
+
+    respond_to do |fmt|
+      fmt.html
+      if @page.markdown?
+        fmt.text { render :text=>"#{@page.name}\n\n#{@page.content}" }
+      end
+    end
   end
 
   # View a static post
   def post
     @post = Post.find_by_slug(params[:id]) || Post.where(:id=>params[:id]).first()
+
+    respond_to do |fmt|
+      fmt.html
+      if @post.markdown?
+        fmt.text { render :text=>"#{@post.name}\n\n#{@post.content}" }
+      end
+    end
   end
 
 

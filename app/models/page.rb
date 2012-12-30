@@ -26,6 +26,14 @@ class Page < ActiveRecord::Base
     !published_at.nil? && published_at < DateTime.now
   end
 
+  def markdown?
+    format == "markdown"
+  end
+
+  def html?
+    format == "html"
+  end
+
 
   # Sluggable URLs:
   def to_param
