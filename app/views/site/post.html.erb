@@ -3,5 +3,7 @@
   # Site / Post
 -%>
 
-<%=render :partial=>"post", :object=>@post, :locals=>{} %>
+<h1><%=@post.name%></h1>
+
+<%=render :partial=>"post", :object=>@post, :locals=>{:hide_title=>true} %>
 

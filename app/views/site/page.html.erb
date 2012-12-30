@@ -3,5 +3,7 @@
   # Site / Page
 -%>
 
-<%=render :partial=>"page", :object=>@page, :locals=>{} %>
+<h1><%= @page.name %></h1>
+
+<%=render :partial=>"page", :object=>@page, :locals=>{:hide_title=>true} %>
 

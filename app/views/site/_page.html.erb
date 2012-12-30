@@ -1,10 +1,16 @@
 <%
   # AIRFIELD
   # Page Partial -- Render a page in archive/list view
+
+  # Preset the hide_title toggle:
+  hide_title ||= false
 -%>
 
 <article id="page-<%=page.id%>" class="page">
-  <h1><%= page.name %></h1>
+  <% unless hide_title %>
+    <h1><%= page.name %></h1>
+  <% end %>
+
   <%= render_markdown(page.content) %>
 </article>
 

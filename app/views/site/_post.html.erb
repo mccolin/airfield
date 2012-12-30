@@ -4,6 +4,9 @@
 
   # Preset the post-counter:
   post_counter ||= nil
+
+  # Preset the hide_title toggle:
+  hide_title ||= false
 -%>
 
 <article id="post-<%=post.id%>" class="post <%=cycle("even", "odd")%> <%= post_counter ? "in_set" : "solo" %>">
@@ -13,11 +16,14 @@
     <span class="year"><%= post.published_at.strftime("%Y") %></span><br/>
   </aside>
   <section class="post-content">
-    <% if post_counter %>
-      <h1><%=link_to post.name, post_path(post) %></h1>
-    <% else %>
-      <h1><%= post.name %></h1>
+    <% unless hide_title %>
+      <% if post_counter %>
+        <h1><%=link_to post.name, post_path(post) %></h1>
+      <% else %>
+        <h1><%= post.name %></h1>
+      <% end %>
     <% end %>
+
     <%= render_markdown(post.content) %>
 
     <% unless post.category_list.blank? %>
