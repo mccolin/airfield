@@ -216,3 +216,37 @@ ul#footer-navigation li.active {
   font-size: 0.8rem;
   font-weight: lighter;
 }
+
+
+//
+// CATEGORY LIST
+//
+
+.post ul.categories {
+  list-style: none;
+  margin: 1em 0;
+  padding: 0;
+  text-align: left;
+}
+.post ul.categories li {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: #666;
+  display: inline-block;
+  font-size: 12px;
+  padding: 0 8px;
+}
+.post ul.categories li:hover {
+  background: #EEF;
+  border: 1px solid #AAA;
+  box-shadow: 1px 1px 1px #999;
+  color: #333;
+}
+.post ul.categories li a {
+  color: #A00 !important;
+  text-decoration: none;
+}
+.post ul.categories li a:hover {
+  color: #F00 !important;
+  text-decoration: none !important;
+}

@@ -10,6 +10,7 @@ Airfield::Application.routes.draw do
 
   # TODO: Replace with more resourceful routing
   get "post/:id" => "site#post", :as=>"post"
+  get "category/:id" => "site#category", :as=>"category"
   get ":id" => "site#page", :as=>"page"
 
 end

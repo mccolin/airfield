@@ -35,6 +35,12 @@ class SiteController < ApplicationController
     end
   end
 
+  # View a category of posts
+  def category
+    @category_name = params[:id]
+    @posts = Post.tagged_with(@category_name, :on=>:categories)
+  end
+
 
   # Load pages for navigation and archive purposes for all site queries:
   def preload_pages

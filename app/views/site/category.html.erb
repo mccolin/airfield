@@ -1,0 +1,9 @@
+<%
+  # AIRFIELD
+  # Site / Category
+-%>
+
+<h1><%=@category_name.capitalize%> Category</h1>
+
+<%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
+

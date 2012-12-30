@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   scope :unpublished, where(:published_at=>nil)
 
   # Attributes:
-  attr_accessible :author_id, :content, :format, :name, :page_id, :position, :properties, :type, :published_at
+  attr_accessible :author_id, :category_list, :content, :format, :name, :page_id, :position, :properties, :type, :published_at
 
   # Key-Value Properties:
   does_keys :column=>"properties"
@@ -20,6 +20,9 @@ class Post < ActiveRecord::Base
 
   # URL-parsing by slug:
   acts_as_url :name, :url_attribute=>:slug, :sync_url=>true
+
+  # Post taxonomy:
+  acts_as_taggable_on :categories
 
 
   def published?

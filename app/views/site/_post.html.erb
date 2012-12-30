@@ -11,7 +11,6 @@
     <span class="month"><%= post.published_at.strftime("%b") %></span><br/>
     <span class="day"><%= post.published_at.strftime("%d") %></span><br/>
     <span class="year"><%= post.published_at.strftime("%Y") %></span><br/>
-    <!-- TODO: Tags, Labels -->
   </aside>
   <section class="post-content">
     <% if post_counter %>
@@ -20,7 +19,15 @@
       <h1><%= post.name %></h1>
     <% end %>
     <%= render_markdown(post.content) %>
-    <!-- TODO: Comments -->
+
+    <% unless post.category_list.blank? %>
+    <ul class="categories">
+      <li>Categories:</li>
+      <% post.category_list.each do |cat| %>
+      <li><%=link_to cat, category_path(cat)-%></li>
+      <% end %>
+    </ul>
+    <% end %>
   </section>
 </article>
 
