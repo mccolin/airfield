@@ -135,6 +135,15 @@ ul#footer-navigation li.active {
   width: 80%;
 }
 
+#content a {
+  color: #039;
+  text-decoration: none;
+}
+#content a:hover {
+  color: #00F;
+  text-decoration: underline;
+}
+
 
 //
 // FOOTER
