@@ -59,6 +59,9 @@ module Airfield
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Doubly-ensure that ActiveAdmin assets are included specifically in precompile
+    config.assets.precompile += %w( active_admin.css active_admin/print.css active_admin.js )
+
     # Prevent Heroku from initializing entire app at slug compilation:
     config.assets.initialize_on_precompile = false
   end
