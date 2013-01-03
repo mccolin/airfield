@@ -13,6 +13,9 @@ module ApplicationHelper
   # Render a series of content keys into a layout template:
   def render_content_in_layout(src, locals)
     template = Liquid::Template.parse(src)
+    locals["content"].each do |key, value|
+      locals["content"][key] = render_markdown(value)
+    end
     render_markdown template.render(locals)
   end
 
