@@ -4,7 +4,7 @@
 class SiteController < ApplicationController
 
   before_filter :preload_pages
-
+  before_filter :preload_links
 
   # Site Homepage
   def index
@@ -45,6 +45,11 @@ class SiteController < ApplicationController
   # Load pages for navigation and archive purposes for all site queries:
   def preload_pages
     @pages = Page.order(:position).order(:name).all() # published()
+  end
+
+  # Load links for navigation and archive purposes for all site queries:
+  def preload_links
+    @links = Link.order(:position, :name)
   end
 
 end

@@ -3,6 +3,9 @@
 
 ActiveAdmin.register User do
 
+  # Menu
+  menu :priority=>10
+
   # Scopes
   scope :all, :default=>true
   scope :admins

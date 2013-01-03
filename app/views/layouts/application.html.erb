@@ -19,6 +19,9 @@
         <% @pages.each do |page| %>
           <%= site_page_navigation_item(page.name, page_path(page)) %>
         <% end # pages %>
+        <% @links.in_header().each do |link| %>
+          <%= site_page_navigation_item(link.name, link.url, :target=>"_blank") %>
+        <% end # links %>
       </ul>
     </div> <!--/#navigation-container-->
     <div class="clearfix"></div>
@@ -35,6 +38,9 @@
         <% @pages.each do |page| %>
           <%= site_page_navigation_item(page.name, page_path(page)) %>
         <% end # pages %>
+        <% @links.in_footer().each do |link| %>
+          <%= site_page_navigation_item(link.name, link.url, :target=>"_blank") %>
+        <% end # links %>
       </ul>
       <span id="powered-by">Colin McCloskey is powered by many things, among them <%=powered_by-%>.</span><br/>
       <span id="site-powered-by">

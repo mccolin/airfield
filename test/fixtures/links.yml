@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  in_header: false
+  parent_id: 1
+  position: 1
+  in_footer: false
+  name: MyString
+  url: MyString
+
+two:
+  in_header: false
+  parent_id: 1
+  position: 1
+  in_footer: false
+  name: MyString
+  url: MyString

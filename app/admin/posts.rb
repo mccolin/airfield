@@ -3,6 +3,9 @@
 
 ActiveAdmin.register Post do
 
+  # Menu
+  menu :priority=>4
+
   # Scopes
   scope :all, :default=>true
   scope :published
