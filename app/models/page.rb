@@ -40,7 +40,8 @@ class Page < ActiveRecord::Base
   end
 
   def layout
-    read_attribute(:layout) || "{{content.body}}"
+    src = read_attribute(:layout)
+    src.blank? ? "{{content.body}}" : src
   end
 
 
