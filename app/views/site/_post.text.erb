@@ -1,0 +1,22 @@
+<%
+  # AIRFIELD
+  # Post Partial (TEXT FORMAT) -- Render a post in an archive/list view
+
+  # Preset the post-counter:
+  post_counter ||= nil
+
+  # Preset the hide_title toggle:
+  hide_title ||= false
+-%>
+
+# <%= post.name %>
+
+(<%= post_path(post, :only_path=>false) %>)
+<%= post.published_at.strftime("%b %d, %Y at %H:%M%p") %>
+Posted in categories: <%= post.category_list %>
+
+--
+
+<%= post.content %>
+
+
