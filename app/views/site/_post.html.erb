@@ -28,7 +28,7 @@
 
     <% unless post.category_list.blank? %>
     <ul class="categories">
-      <li>Categories:</li>
+      <span>Categories:</span>
       <% post.category_list.each do |cat| %>
       <li><%=link_to cat, category_path(cat)-%></li>
       <% end %>
