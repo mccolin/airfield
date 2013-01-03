@@ -27,7 +27,7 @@ module SiteHelper
   def site_page_navigation_item(text, path, html_opts={})
     li_class = current_page?(path) ? "active" : ""
     content_tag :li, :class=>li_class do
-      link_to text, path, html_opts
+      link_to text.html_safe, path, html_opts
     end
   end
 
