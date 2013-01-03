@@ -14,6 +14,7 @@ class SiteController < ApplicationController
   # View a static page
   def page
     @page = Page.find_by_slug(params[:id]) || Page.where(:id=>params[:id]).first()
+    @page_title = @page.name
 
     respond_to do |fmt|
       fmt.html
@@ -24,6 +25,7 @@ class SiteController < ApplicationController
   # View a static post
   def post
     @post = Post.find_by_slug(params[:id]) || Post.where(:id=>params[:id]).first()
+    @page_title = @post.name
 
     respond_to do |fmt|
       fmt.html
@@ -35,6 +37,7 @@ class SiteController < ApplicationController
   def category
     @category_name = params[:id]
     @posts = Post.tagged_with(@category_name, :on=>:categories)
+    @page_title = @category_name
   end
 
 

@@ -3,6 +3,17 @@
 
 module SiteHelper
 
+  # Display a site title
+  def site_title
+    if current_page?(home_path)
+      "I Am McColin - Colin McCloskey"
+    elsif @page_title
+      "#{@page_title} - I Am McColin"
+    else
+      "I Am McColin"
+    end
+  end
+
   # Render a navigable menu with links to pages
   def site_page_navigation_menu(pages, menu_html={}, item_html={})
     content_tag :ul, menu_html do
