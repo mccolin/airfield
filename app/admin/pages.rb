@@ -32,9 +32,12 @@ ActiveAdmin.register Page do
       row :published_at
       row :updated_at
     end
-    panel "Body Content" do
-      div(:style=>"padding:10px; margin: 1em 2em;") do
-        render_markdown(page.content)
+
+    page.content.each do |content_key, content_value|
+      panel "#{content_key.capitalize} Content" do
+        div(:style=>"padding:10px; margin: 1em 2em;") do
+          render_markdown(content_value)
+        end
       end
     end
   end

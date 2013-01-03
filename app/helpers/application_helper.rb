@@ -10,4 +10,10 @@ module ApplicationHelper
     @marker.render(src).html_safe
   end
 
+  # Render a series of content keys into a layout template:
+  def render_content_in_layout(src, locals)
+    template = Liquid::Template.parse(src)
+    render_markdown template.render(locals)
+  end
+
 end

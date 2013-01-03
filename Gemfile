@@ -33,3 +33,4 @@ gem "tinymce-rails", "~> 3.5.8"     # Replaced by Markdown or options?
 gem "redcarpet", "~> 2.2.2"
 gem "stringex", "~> 1.5.1"
 gem "acts-as-taggable-on", "~> 2.3.3"
+gem "liquid", "~> 2.4.1"

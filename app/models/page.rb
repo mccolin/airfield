@@ -13,7 +13,10 @@ class Page < ActiveRecord::Base
   scope :unpublished, where(:published_at=>nil)
 
   # Attributes:
-  attr_accessible :author_id, :content, :format, :name, :parent_id, :position, :properties, :type, :published_at
+  attr_accessible :author_id, :content, :format, :layout, :name, :parent_id, :position, :properties, :type, :published_at
+
+  # The content column of a Page is a serialized key set:
+  serialize :content, ContentMashSerializer.new
 
   # Key-Value Properties:
   does_keys :column=>"properties"
@@ -34,6 +37,10 @@ class Page < ActiveRecord::Base
 
   def html?
     format == "html"
+  end
+
+  def layout
+    read_attribute(:layout) || "{{content.body}}"
   end
 
 

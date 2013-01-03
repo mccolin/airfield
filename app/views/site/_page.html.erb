@@ -11,6 +11,6 @@
     <h1><%= page.name %></h1>
   <% end %>
 
-  <%= render_markdown(page.content) %>
+  <%= render_content_in_layout(page.layout, "content"=>page.content) %>
 </article>
 
