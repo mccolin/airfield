@@ -1,0 +1,19 @@
+<%
+  # AIRFIELD
+  # Page Partial (TEXT) -- Render a page in archive/list view
+
+  # Preset the hide_title toggle:
+  hide_title ||= false
+-%>
+
+<% unless hide_title %>
+# <%= page.name %>
+<% end %>
+
+<% page.content.each do |content_key, content_value| %>
+## <%= content_key %>
+
+<%= content_value %>
+
+<% end %>
+

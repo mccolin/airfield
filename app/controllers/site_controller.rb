@@ -17,9 +17,7 @@ class SiteController < ApplicationController
 
     respond_to do |fmt|
       fmt.html
-      if @page.markdown?
-        fmt.text { render :text=>"#{@page.name}\n\n#{@page.content}" }
-      end
+      fmt.text if @page.markdown?
     end
   end
 
