@@ -27,9 +27,12 @@
     <div class="clearfix"></div>
   </header>
 
-  <div id="content">
-    <%= yield %>
-  </div>
+  <div id="content-container">
+    <div id="content">
+      <%= yield %>
+      <div class="clearfix"></div>
+    </div>
+  </div> <!--#content-container-->
 
   <footer id="footer-container">
     <div id="footer">
