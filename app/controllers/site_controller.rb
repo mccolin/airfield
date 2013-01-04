@@ -8,12 +8,12 @@ class SiteController < ApplicationController
 
   # Site Homepage
   def index
-    @posts = Post.order("created_at DESC").all() # published()
+    @posts = Post.order("created_at DESC")    # published()
   end
 
   # View a static page
   def page
-    @page = Page.find_by_slug(params[:id]) || Page.where(:id=>params[:id]).first()
+    @page = Page.where(:slug=>params[:id]).first() || Page.where(:id=>params[:id]).first()
     @page_title = @page.name
 
     respond_to do |fmt|
@@ -24,7 +24,7 @@ class SiteController < ApplicationController
 
   # View a static post
   def post
-    @post = Post.find_by_slug(params[:id]) || Post.where(:id=>params[:id]).first()
+    @post = Post.where(:slug=>params[:id]).first() || Post.where(:id=>params[:id]).first()
     @page_title = @post.name
 
     respond_to do |fmt|
