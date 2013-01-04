@@ -28,9 +28,9 @@ gem "jquery-rails"
 gem "activeadmin", "~> 0.5.1"
 gem "sass-rails", "~> 3.2.3"
 gem "doeskeyvalue", "~> 0.9.0"            # Pre-release, but live
-gem "tinymce-rails", "~> 3.5.8"           # Replaced by Markdown or options?
-gem "redcarpet", "~> 2.2.2"               # Markdown support
+gem "redcarpet", "~> 2.2.2"               # Markdown render support
 gem "stringex", "~> 1.5.1"                # Sluggable URLs
 gem "acts-as-taggable-on", "~> 2.3.3"     # Taxonomy
 gem "liquid", "~> 2.4.1"                  # Templating, Layout
 gem "font-awesome-rails", "~> 0.4.1"      # FontAwesome used by Hallo.js editor
+

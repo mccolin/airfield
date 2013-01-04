@@ -20,11 +20,13 @@
       <% if post_counter %>
         <h1><%=link_to post.name, post_path(post) %></h1>
       <% else %>
-        <h1><%= post.name %></h1>
+        <h1 class="editable title"><%= post.name %></h1>
       <% end %>
     <% end %>
 
+    <span class="editable body">
     <%= render_markdown(post.content) %>
+    </span>
 
     <% unless post.category_list.blank? %>
     <ul class="categories">
@@ -35,5 +37,10 @@
     </ul>
     <% end %>
   </section>
+  <aside class="edit-triggers">
+    <%=link_to "<i class='icon-pencil'></i> Edit Post".html_safe, "#", :class=>"edit-trigger", "data-editable"=>"post-#{post.id}" %>
+    <%=link_to "<i class='icon-ok'></i> Stop Editing".html_safe, "#", :class=>"edit-stopper", "data-editable"=>"post-#{post.id}" %>
+  </aside>
 </article>
+
 
