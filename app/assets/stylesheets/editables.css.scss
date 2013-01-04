@@ -1,0 +1,23 @@
+// AIRFIELD
+// Editables CSS -- Sass/SCSS rules for display of editable items
+
+.editable {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  display: block;
+}
+.editable:hover {
+  background: rgba(255,215,0,0.25);
+  border: 2px solid #FFD700;
+}
+.editable:focus {
+  background: #FFF;
+}
+
+.hallotoolbar {
+  padding: 0.1em 0.2em;
+  border-radius: 4px;
+}
+.ui-button-text .ui-button-text {
+  padding: 0;
+}
