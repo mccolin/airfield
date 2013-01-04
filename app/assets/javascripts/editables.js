@@ -7,7 +7,7 @@ $(function(){
   /** At Load Trigger: Enabled Editing on all editable content: */
   $(".editable").hallo({
     editable: true,
-    toolbar: "halloToolbarFixed", // "halloToolbarContextual",
+    toolbar: "halloToolbarContextual",    // halloToolbarFixed
     toolbarCssClass: "ui-widget-header",
     toolbarPositionAbove: true,
     plugins: {
