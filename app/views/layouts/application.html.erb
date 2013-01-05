@@ -10,8 +10,8 @@
 
   <header id="header-container">
     <div id="header">
-      <h2><%=subtitle-%></h2><br/>
-      <h1>Colin McCloskey</h1>
+      <h1><%=greeting-%> I'm Colin McCloskey</h1><br/>
+      <h2><%=subtitle-%></h2>
     </div> <!--/#header-->
     <div id="navigation-container">
       <ul id="navigation">
@@ -54,7 +54,7 @@
           <%= site_page_navigation_item(link.name, link.url, :target=>"_blank") %>
         <% end # links %>
       </ul>
-      <span id="powered-by">Colin McCloskey is powered by many things, among them <%=powered_by-%>.</span><br/>
+      <span id="powered-by">&copy; 2013 Colin McCloskey is powered by many things, among them <%=powered_by-%>.</span><br/>
       <span id="site-powered-by">
         This website is powered by <%=link_to "Airfield", "http://github.com/mccolin/airfield"-%>, a static site and
         blogging platform from <%=link_to "Awexome Labs", "http://awexomelabs.com/?ref=powered-by&partner=mccolin"-%>.

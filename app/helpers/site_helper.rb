@@ -36,12 +36,27 @@ module SiteHelper
     set[rand(set.length)].html_safe
   end
 
+  # Greeting string
+  def greeting
+    now = DateTime.now
+    if now.month == 10
+      "Boo!"
+    elsif now.month == 1 && now.day == 23
+      "It's my Birthday!"
+    elsif now.month == 12 && now.day > 12 && now.day <= 25
+      "Ho! Ho! Ho!"
+    else
+      random_and_sane %w(Hi! Hi! Hi. Hey. Hello. Hola!)
+    end
+  end
+
   # Subtitle string
   def subtitle
     random_and_sane [
       "Bearded computery nerd person.",
-      "Hero. Husband. Ham-lover.",
-      "Trained nerd and things enthusiast"
+      "Philadelphia- and carbon-based life form.",
+      "Zombie, shark, and snake fascinator.",
+      "Statistical, analytical, atypical man person."
     ]
   end
 
@@ -51,10 +66,10 @@ module SiteHelper
       "Diet Pepsi",
       "the funny voice he uses to talk to dogs",
       "the love of his life, <a href=\"http://thebluesunshine.com/\">Lizza</a>",
-      "Cliff Lee's throwing motion",
-      "his sweet tooth for Nerds rope",
-      "any and all types of potatoes",
-      "WaWa Hot to Go bowls, however gross they seem"
+      "hoagies from <a href=\"https://foursquare.com/v/sarcones-deli/4a9b035ef964a520fc3320e3\">Sarcone's Deli</a>",
+      "his sweet tooth for #{random_and_sane ['Nerds rope','Mike and Ikes','Peppermint Patties']}",
+      "any and all potatoes",
+      "rays of sunshine trickling through his backyard fig tree"
     ]
   end
 
