@@ -34,3 +34,4 @@ gem "acts-as-taggable-on", "~> 2.3.3"     # Taxonomy
 gem "liquid", "~> 2.4.1"                  # Templating, Layout
 gem "font-awesome-rails", "~> 0.4.1"      # FontAwesome used by Hallo.js editor
 gem "kaminari"                            # Pagination
+gem "has_heartbeat", "~> 0.1.1"           # Heartbeat for uptime monitoring

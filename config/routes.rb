@@ -2,6 +2,9 @@
 # Routing
 
 Airfield::Application.routes.draw do
+
+  get "heartbeat" => "heartbeat#index", :as=>"heartbeat"
+
   ActiveAdmin.routes(self)
 
   devise_for :users, ActiveAdmin::Devise.config
