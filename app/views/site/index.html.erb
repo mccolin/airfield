@@ -5,3 +5,7 @@
 
 <%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
 
+<div id="pagination">
+  <%=link_to_previous_page @posts, "<i class='icon-arrow-left'></i> Newer Posts".html_safe %>
+  <%=link_to_next_page @posts, "Older Posts <i class='icon-arrow-right'></i>".html_safe %>
+</div>

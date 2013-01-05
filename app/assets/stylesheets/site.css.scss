@@ -162,6 +162,14 @@ ul#footer-navigation li.active {
   padding-top: 0.67em;
 }
 
+#pagination {
+  clear: both;
+  margin: 1em 0;
+  text-align: center;
+}
+#pagination a:first-child {
+  padding-right: 1em;
+}
 
 //
 // FOOTER

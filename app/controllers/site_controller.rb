@@ -8,7 +8,7 @@ class SiteController < ApplicationController
 
   # Site Homepage
   def index
-    @posts = Post.order("created_at DESC")    # published()
+    @posts = Post.order("created_at DESC").page(params[:page] || 1).per(5)    # published()
   end
 
   # View a static page
