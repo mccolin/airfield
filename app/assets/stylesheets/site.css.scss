@@ -100,6 +100,9 @@ ul#navigation li a {
 ul#navigation li.active a {
   color: #000;
 }
+ul#navigation li a.highlight {
+  color: #9F3;
+}
 
 ul#footer-navigation {
   list-style: none;

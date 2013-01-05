@@ -24,10 +24,10 @@ module SiteHelper
   end
 
   # Render an active/inactive navigation item for the given link path, title
-  def site_page_navigation_item(text, path, html_opts={})
+  def site_page_navigation_item(text, path, link_html_opts={}, li_html_opts={})
     li_class = current_page?(path) ? "active" : ""
-    content_tag :li, :class=>li_class do
-      link_to text.html_safe, path, html_opts
+    content_tag :li, li_html_opts.merge(:class=>li_class) do
+      link_to text.html_safe, path, link_html_opts
     end
   end
 

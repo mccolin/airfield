@@ -22,7 +22,15 @@
         <% @links.in_header().each do |link| %>
           <%= site_page_navigation_item(link.name, link.url, :target=>"_blank") %>
         <% end # links %>
-        <%= site_page_navigation_item("<i class='icon-wrench'></i> Edit", "#", :id=>"edit-mode-toggle") %>
+
+        <% if current_user %>
+          <%= site_page_navigation_item("<i class='icon-unlock'></i> Logout", destroy_user_session_path(), {}, :style=>"float:right;") %>
+          <%= site_page_navigation_item("<i class='icon-pencil'></i> Edit", content_path(), {:id=>"edit-mode-toggle"}, :style=>"float:right;") %>
+        <% else %>
+          <%= site_page_navigation_item("<i class='icon-lock'></i> Login", new_user_session_path(), {}, :style=>"float:right;") %>
+        <% end %>
+
+
       </ul>
     </div> <!--/#navigation-container-->
     <div class="clearfix"></div>

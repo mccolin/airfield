@@ -6,6 +6,9 @@
   border-radius: 4px;
   display: block;
 }
+.editable.activated {
+  border: 2px dashed rgba(255,215,0,0.6);
+}
 .editable.activated:hover {
   background: rgba(255,215,0,0.25);
   border: 2px solid #FFD700;
