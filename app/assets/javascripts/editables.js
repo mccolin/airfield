@@ -4,49 +4,42 @@
 
 $(function(){
 
-  /** At Load Trigger: Enabled Editing on all editable content: */
-  $(".editable").hallo({
-    editable: true,
-    toolbar: "halloToolbarContextual",    // halloToolbarFixed
-    toolbarCssClass: "ui-widget-header",
-    toolbarPositionAbove: true,
-    plugins: {
-      "halloformat": {},
-      "halloheadings": {headers: [2,3]},
-      "hallojustify": {},
-      "hallolists": {},
-      "hallolink": {},
-      "halloimage": {}
-    },
+  /** Edit Link Trigger: Set all on-page editables ready-to-go: */
+  $("#edit-mode-toggle").click(function(e){
+    var $toggle = $(this);
+    if ($toggle.hasClass("active"))
+      $toggle.removeClass("active").trigger("deactivateEdit");
+    else
+      $toggle.addClass("active").trigger("activateEdit");
   });
-  console.log( $(".editable").length + " editable regions enabled on page.");
 
-  // /** Trigger: Begin Editing */
-  // $(".edit-trigger").click(function(e){
-  //   e.preventDefault();
-  //   var containerId = $(this).attr("data-editable");
-  //   $("#"+containerId+" .editable").hallo({
-  //     editable: true,
-  //     toolbar: "halloToolbarContextual",
-  //     plugins: {
-  //       "halloformat": {},
-  //       "halloheadings": {headers: [2,3,4,5,6]},
-  //       "hallojustify": {},
-  //       "hallolists": {},
-  //       "hallolink": {},
-  //       "halloimage": {}
-  //     },
-  //   });
-  //   console.log("Editable container \""+containerId+"\" has been triggered.");
-  // });
+  /** Starter: Begin editable mode on this page: */
+  $("#edit-mode-toggle").on("activateEdit", function(e){
+    e.preventDefault();
+    $(this).addClass("active");
+    $(".editable").addClass("activated").hallo({
+      editable: true,
+      toolbar: "halloToolbarContextual",    // halloToolbarFixed
+      toolbarCssClass: "ui-widget-header",
+      toolbarPositionAbove: true,
+      plugins: {
+        "halloformat": {},
+        "halloheadings": {headers: [2,3]},
+        // "hallojustify": {},
+        "hallolists": {},
+        "hallolink": {},
+        "halloimage": {}
+      },
+    });
+    console.log( $(".editable").length + " editable regions enabled on page.");
+  });
 
-  // /** Stopper: Stop Editing */
-  // $(".edit-stopper").click(function(e){
-  //   e.preventDefault();
-  //   var containerId = $(this).attr("data-editable");
-  //   $("#"+containerId+" .editable-content").hallo({editable: false});
-  //   console.log("Editable container \""+containerId+"\" has been stopped.");
-  // });
+  /** Stopper: Stop Editing */
+  $("#edit-mode-toggle").on("deactivateEdit", function(e){
+    e.preventDefault();
+    $(this).removeClass("active");
+    $(".editable").removeClass("activated").hallo({editable:false});
+  });
 
   /** Markdown Editor Support **/
   /** Markdown Editor Support **/
@@ -87,25 +80,22 @@ $(function(){
 
 
   /** Editables: Bind to save */
-  $(".editable").on("hallomodified", function(e, data){
-    // console.log("Editable modified. Content:");
-    // console.log(data.content);
+  // $(".editable").on("hallomodified", function(e, data){
+  //   console.log("Editable modified. Content converted to Markdown:");
+  //   console.log( markdownize(data.content) );
+  // });
 
-    // console.log("Editable modified. Content converted to Markdown:");
-    // console.log( markdownize(data.content) );
-  });
+  // $(".editable").on("halloselected", function(e, data){
+  //   console.log("Editable has active selection.");
+  // });
 
-  $(".editable").on("halloselected", function(e, data){
-    console.log("Editable has active selection.");
-  });
+  // $(".editable").on("hallounselected", function(e, data){
+  //   console.log("Editable has inactive selection.");
+  // });
 
-  $(".editable").on("hallounselected", function(e, data){
-    console.log("Editable has inactive selection.");
-  });
-
-  $(".editable").on("hallorestored", function(e, data){
-    console.log("Editable restored.");
-  });
+  // $(".editable").on("hallorestored", function(e, data){
+  //   console.log("Editable restored.");
+  // });
 
   $(".editable").on("halloactivated", function(e, data){
     console.log("Editable has been activated by user. Begin edit mode.");
@@ -120,9 +110,25 @@ $(function(){
     var editable = $(this);
     if ( editable.hasClass("isModified") ){
       console.log("Content has been modified. Saving");
-      // TODO: Save content
       var src = markdownize(editable.html());
       console.log(src);
+
+      $.ajax({
+        type: "PUT",          // PUT maps to update action
+        dataType: "json",
+        url: "http://airfield.dev/content",
+        data: {
+          type: editable.attr("data-content-type"),
+          id: editable.attr("data-content-id"),
+          key: editable.attr("data-content-key"),
+          value: src
+        },
+        success: function(data, status, xhr){
+          console.log("Content update posted to server and return successful:");
+          console.log(data);
+        }
+      });
+      console.log("Server request for update sent to server.");
       editable.removeClass("isModified");
     } else {
       console.log("Content has not been modified. Abstaining.");

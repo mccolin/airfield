@@ -3,7 +3,7 @@
   # Site / Post
 -%>
 
-<h1><%=@post.name%></h1>
+<h1 class="editable" data-content-type="post" data-content-id="<%=@post.id-%>" data-content-key="name"><%= @post.name %></h1>
 
 <%=render :partial=>"post", :object=>@post, :locals=>{:hide_title=>true} %>
 
