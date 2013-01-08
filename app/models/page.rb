@@ -45,6 +45,16 @@ class Page < ActiveRecord::Base
   end
 
 
+  # Queryable keys in Liquid templates:
+  def to_liquid
+    {
+      author: self.author.name,
+      id: self.id,
+      name: self.name,
+      content: self.content
+    }.stringify_keys
+  end
+
   # Sluggable URLs:
   def to_param
     slug

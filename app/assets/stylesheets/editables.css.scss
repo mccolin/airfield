@@ -24,3 +24,13 @@
 .ui-button-text .ui-button-text {
   padding: 0;
 }
+
+
+//
+// ERROR MESSAGES
+//
+
+.error.parse-error {
+  display: inline-block;
+  padding: 1em;
+}

@@ -8,9 +8,10 @@
 
 <article id="page-<%=page.id%>" class="page">
   <% unless hide_title %>
-    <h1><%= page.name %></h1>
+    <h1 class="editable" data-content-type="page" data-content-id="<%=page.id-%>" data-content-key="name"><%= page.name %></h1>
   <% end %>
 
-  <%= render_content_in_layout(page.layout, "content"=>page.content) %>
+  <%= render_content_in_layout(page.layout, page) %>
+
 </article>
 
