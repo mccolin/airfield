@@ -23,8 +23,6 @@ module ApplicationHelper
   def render_content_in_layout(layout, object)
     content = object.content
     layout.gsub /\{\{(.+?)\}\}/ do |tag_invocation|
-      logger.ap tag_invocation
-
       if md = tag_invocation.match(/^\{\{\s*?(\w+)(.*?)\}\}$/)
         tag = md[1]
         token_string = md[2]

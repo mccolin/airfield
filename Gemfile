@@ -10,7 +10,6 @@ gem "rails", "3.2.8"
 group :development do
   gem "mysql2"
   gem "quiet_assets"
-  gem "awesome_print"
 end
 
 # Production dependencies:
