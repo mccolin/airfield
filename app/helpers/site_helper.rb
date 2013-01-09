@@ -56,7 +56,8 @@ module SiteHelper
       "Bearded computery nerd person.",
       "Philadelphia- and carbon-based life form.",
       "Zombie, shark, and snake fascinator.",
-      "Statistical, analytical, atypical man person."
+      "Statistical, analytical, atypical man person.",
+      "I often wear slippers to work"
     ]
   end
 
