@@ -22,7 +22,7 @@ $(function(){
     $toggle.addClass("highlight").html( $toggle.html().replace("Edit","Editing...") );
 
     // Make editable fields active:
-    $(".editable .field").addClass("activated").hallo({
+    $(".editable .field, .insertable .field").addClass("activated").hallo({
       editable: true,
       toolbar: "halloToolbarContextual",    // halloToolbarFixed
       toolbarCssClass: "ui-widget-header",
@@ -38,6 +38,9 @@ $(function(){
     });
     console.log( $(".editable .field").length + " editable fields enabled on page.");
 
+    // Make edit-only UI elements active:
+    $(".edit-ui").addClass("activated");
+
     // Make insertable/create fields active:
     $(".insertable").addClass("activated");
   });
@@ -50,6 +53,9 @@ $(function(){
 
     // Deactivate editable fields on the page:
     $(".editable .field").removeClass("activated").hallo({editable:false});
+
+    // Deactivate edit-only UI elements:
+    $(".edit-ui").removeClass("activated");
 
     // Deactivate insertable/create fields:
     $(".insertable").removeClass("activated");
@@ -103,21 +109,43 @@ $(function(){
   /** Insertable: Click Add Content Button: */
   $(".add-content-button").click(function(e){
     e.preventDefault();
-    alert("You want to add a new "+$(this).attr("data-content-type")+" content");
+    var $button = $(this);
+    $.get(
+      $button.prop("href"),
+      {type: $button.attr("data-content-type")},
+      function(data, status, xhr){
+        console.log("New content response received from server:");
+        console.log(data);
+        if (data) {
+          $button.hide().after(data);
+          console.log("New form item rendered to page.");
+          $("#edit-mode-toggle").trigger("activateEdit");
+          $(".insertable .save-button").click(function(e){
+            e.preventDefault();
+            $(this).parents(".insertable").first().trigger("saveContent");
+          }
+        }
+      }
+    );
+    console.log("New content request sent to server.");
   });
 
 
   /** Insertable: Save new content to server: */
-  $(".insertable .save-button").click(function(e){
+  $(".insertable").on("saveContent", function(e){
     e.preventDefault();
-    var $saveButton = $(this);
-    var $insertable = $saveButton.parents(".insertable").first();
+    var $insertable = $(this);
+    var $saveButton = $insertable.find(".save-button").first();
 
     var contentData = new Array();
     $insertable.find(".field").each(function(idx, el){
       var $field = $(this);
       contentData.push({key: $field.attr("data-content-key"), value: markdownize($field.html()) });
     });
+
+    console.log("Will send insertable save to "+$saveButton.prop("href"));
+    console.log("contentData to send:");
+    console.log(contentData);
 
     $.ajax({
       type: "POST",
@@ -140,6 +168,7 @@ $(function(){
       }
     });
     console.log("Server request for content creation sent to server.");
+    $("#edit-mode-toggle").trigger("deactivateEdit");
   });
 
 });

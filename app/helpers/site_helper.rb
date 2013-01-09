@@ -31,6 +31,21 @@ module SiteHelper
     end
   end
 
+  # Render a link as an iconned button
+  def btn_link_to(text, path, opts={})
+    html_opts = opts
+    html_classes = %w(btn)
+    if klass = html_opts.delete(:class)
+      html_classes << klass
+    end
+    html_opts[:class] = html_classes.join(" ")
+    if icon = html_opts.delete(:icon)
+      text = "<i class=\"icon-#{icon}\"></i> #{text}"
+    end
+    link_to text.html_safe, path, html_opts
+  end
+
+
   # Select and sanitize a random string from a set
   def random_and_sane(set)
     set[rand(set.length)].html_safe

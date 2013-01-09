@@ -12,8 +12,11 @@
   <section class="post-content">
     <h1 class="field" data-content-key="name">New Post</h1>
     <span class="field" data-content-key="content">
-      Change this next to begin editing your new post...
+      Change this text to begin editing your new post...
     </span>
   </section>
-  <i class="icon-save"></i> <%=link_to "Save New Post", content_path(), :class=>"save-button" %>
+
+
+  <%=btn_link_to "Save Post", content_path(), :icon=>"save", :class=>"save-button" %>
+
 </article>
