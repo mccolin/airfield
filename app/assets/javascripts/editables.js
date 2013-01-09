@@ -18,10 +18,11 @@ $(function(){
   /** Starter: Begin editable mode on this page: */
   $("#edit-mode-toggle").on("activateEdit", function(e){
     e.preventDefault();
-    $(this).addClass("highlight").html( $(this).html().replace("Edit","Editing...") );
+    var $toggle = $(this);
+    $toggle.addClass("highlight").html( $toggle.html().replace("Edit","Editing...") );
 
     // Make editable fields active:
-    $(".editable").addClass("activated").hallo({
+    $(".editable .field").addClass("activated").hallo({
       editable: true,
       toolbar: "halloToolbarContextual",    // halloToolbarFixed
       toolbarCssClass: "ui-widget-header",
@@ -35,7 +36,7 @@ $(function(){
         "halloimage": {}
       },
     });
-    console.log( $(".editable").length + " editable regions enabled on page.");
+    console.log( $(".editable .field").length + " editable fields enabled on page.");
 
     // Make insertable/create fields active:
     $(".insertable").addClass("activated");
@@ -48,7 +49,7 @@ $(function(){
     $(this).removeClass("highlight").html( $(this).html().replace("Editing...","Edit") );
 
     // Deactivate editable fields on the page:
-    $(".editable").removeClass("activated").hallo({editable:false});
+    $(".editable .field").removeClass("activated").hallo({editable:false});
 
     // Deactivate insertable/create fields:
     $(".insertable").removeClass("activated");
@@ -65,15 +66,17 @@ $(function(){
 
 
   /** Activation: When user focues on field, take action: */
-  $(".editable").on("halloactivated", function(e, data){});
+  $(".editable .field").on("halloactivated", function(e, data){});
 
 
   /** Deactivation: When user unfocues from field, send updates to server: */
-  $(".editable").on("hallodeactivated", function(e, data){
+  $(".editable .field").on("hallodeactivated", function(e, data){
     console.log("Editable has been deactivated by user. Server save likely here.");
 
-    var $editable = $(this);
-    if ( $editable.hasClass("isModified") ){
+    var $field = $(this);
+    var $editable = $field.parents(".editable").first();
+
+    if ( $field.hasClass("isModified") ){
       console.log("Content has been modified. Saving");
       var $toggle = $("#edit-mode-toggle");
       $.ajax({
@@ -83,16 +86,24 @@ $(function(){
         data: {
           type: $editable.attr("data-content-type"),
           id: $editable.attr("data-content-id"),
-          key: $editable.attr("data-content-key"),
-          value: markdownize($editable.html())
+          key: $field.attr("data-content-key"),
+          value: markdownize($field.html())
         },
         success: function(data, status, xhr){
-          $editable.removeClass("isModified");
+          $field.removeClass("isModified");
           console.log("Content successfully saved to server.");
         }
       });
       console.log("Server request for content update sent to server.");
     }
+  });
+
+
+
+  /** Insertable: Click Add Content Button: */
+  $(".add-content-button").click(function(e){
+    e.preventDefault();
+    alert("You want to add a new "+$(this).attr("data-content-type")+" content");
   });
 
 

@@ -3,6 +3,18 @@
 
 class ContentController < ApplicationController
 
+  # Display a template/form for content creation
+  def new
+    begin
+      klass = params[:type].camelcase.constantize
+      partial_name = "new_#{klass.to_s.downcase.underscore}"
+
+      render :partial=>partial_name, :object=>klass.new, :locals=>{}
+    rescue NameError => ne
+      render :text=>"Error loading new content form for type #{params[:type]}.", :status=>500
+    end
+  end
+
   # Create content
   def create
     klass = params[:type].camelcase.constantize

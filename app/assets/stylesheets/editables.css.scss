@@ -1,19 +1,19 @@
 // AIRFIELD
 // Editables CSS -- Sass/SCSS rules for display of editable items
 
-.editable {
+.editable .field {
   border: 2px solid transparent;
   border-radius: 4px;
   display: block;
 }
-.editable.activated {
+.editable .field.activated {
   border: 2px dashed rgba(255,215,0,0.6);
 }
-.editable.activated:hover {
+.editable .field.activated:hover {
   background: rgba(255,215,0,0.25);
   border: 2px solid #FFD700;
 }
-.editable.activated:focus {
+.editable .field.activated:focus {
   background: #FFF;
 }
 
@@ -23,6 +23,21 @@
 }
 .ui-button-text .ui-button-text {
   padding: 0;
+}
+
+//
+// BUTTONS
+//
+
+.add-content-button {}
+.add-content-button:hover i {
+  text-decoration: none;
+}
+
+#content .add-content-button {
+  display: inline-block;
+  margin: 1em 0 1em 125px;
+  text-decoration: none;
 }
 
 //

@@ -3,22 +3,7 @@
   # Site / Index
 -%>
 
-
-<article id="post-template" class="post in_set insertable" data-content-type="post">
-  <aside class="post-aside">
-    <span class="month" data-content-key="published_at.month"><%= DateTime.now.strftime("%b") %></span><br/>
-    <span class="day" data-content-key="published_at.day"><%= DateTime.now.strftime("%d") %></span><br/>
-    <span class="year" data-content-key="published_at.year"><%= DateTime.now.strftime("%Y") %></span><br/>
-  </aside>
-  <section class="post-content">
-    <h1 class="field" data-content-key="name">New Post</h1>
-    <span class="field" data-content-key="content">
-      Change this next to begin editing your new post...
-    </span>
-  </section>
-  <i class="icon-save"></i> <%=link_to "Save New Post", content_path(), :class=>"save-button" %>
-</article>
-
+<%=link_to "<i class=\"icon-plus\"></i> Add New Post".html_safe, "#", :class=>"button add-content-button", "data-content-type"=>"post" %>
 
 <%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
 

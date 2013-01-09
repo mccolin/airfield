@@ -14,7 +14,7 @@ Airfield::Application.routes.draw do
   # TODO: Replace with more resourceful routing
 
   # Content management:
-  resource :content, :controller=>"content", :only=>[:create, :update, :destroy]
+  resource :content, :controller=>"content", :only=>[:new, :create, :update, :destroy]
 
   # Site display of posts, categories, and pages:
   get "post/:id" => "site#post", :as=>"post"
