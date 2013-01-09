@@ -25,6 +25,17 @@
   padding: 0;
 }
 
+//
+// INSERTABLES
+//
+
+.insertable {
+  display: none;
+}
+.insertable.activated {
+  display: block;
+}
+
 
 //
 // ERROR MESSAGES
