@@ -23,5 +23,5 @@
 //
 //= require_tree .
 
-console.log("Application CSS loaded");
+console.log("Application JS loaded");
 

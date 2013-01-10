@@ -4,25 +4,28 @@
 
 $(function(){
 
-  /** Edit Link Trigger: Set all on-page editables ready-to-go: */
-  $("#edit-mode-toggle").click(function(e){
+  /**
+  /* Edit Trigger: Activate edit mode: **/
+  $("#edit-mode-toggle").on("click", function(e){
     e.preventDefault();
     var $toggle = $(this);
-    if ($toggle.hasClass("highlight"))
-      $toggle.trigger("deactivateEdit");
-    else
-      $toggle.trigger("activateEdit");
+    if ($toggle.hasClass("highlight")) {
+      $toggle.removeClass("highlight").html( $toggle.html().replace("Editing...","Edit") )
+      $(".editable, .insertable").trigger("disableEdit");
+    }
+    else {
+      $toggle.addClass("highlight").html( $toggle.html().replace("Edit","Editing...") )
+      $(".editable, .insertable").trigger("enableEdit");
+    }
   });
 
 
-  /** Starter: Begin editable mode on this page: */
-  $("#edit-mode-toggle").on("activateEdit", function(e){
-    e.preventDefault();
-    var $toggle = $(this);
-    $toggle.addClass("highlight").html( $toggle.html().replace("Edit","Editing...") );
-
-    // Make editable fields active:
-    $(".editable .field, .insertable .field").addClass("activated").hallo({
+  /**
+  /* Editable/Insertable: Enable editing mode: **/
+  $(".editable, .insertable").on("enableEdit", function(e){
+    var $container = $(this);
+    var $fields = $container.find(".field");
+    $fields.addClass("activated").hallo({
       editable: true,
       toolbar: "halloToolbarContextual",    // halloToolbarFixed
       toolbarCssClass: "ui-widget-header",
@@ -34,31 +37,17 @@ $(function(){
         "hallolists": {},
         "hallolink": {},
         "halloimage": {}
-      },
+      }
     });
-    console.log( $(".editable .field").length + " editable fields enabled on page.");
-
-    // Make edit-only UI elements active:
-    $(".edit-ui").addClass("activated");
-
-    // Make insertable/create fields active:
-    $(".insertable").addClass("activated");
   });
 
 
-  /** Stopper: Stop Editing */
-  $("#edit-mode-toggle").on("deactivateEdit", function(e){
-    e.preventDefault();
-    $(this).removeClass("highlight").html( $(this).html().replace("Editing...","Edit") );
-
-    // Deactivate editable fields on the page:
-    $(".editable .field").removeClass("activated").hallo({editable:false});
-
-    // Deactivate edit-only UI elements:
-    $(".edit-ui").removeClass("activated");
-
-    // Deactivate insertable/create fields:
-    $(".insertable").removeClass("activated");
+  /**
+  /* Editable/Insertable: Disable the current editing mode: */
+  $(".editable, .insertable").on("disableEdit", function(e){
+    var $container = $(this);
+    var $fields = $container.find(".field");
+    $fields.removeClass("activated").hallo({editable:false});
   });
 
 
@@ -71,20 +60,24 @@ $(function(){
   };
 
 
-  /** Activation: When user focues on field, take action: */
-  $(".editable .field").on("halloactivated", function(e, data){});
+  /**
+  /* Activation: When user focues on field, take action: */
+  $(".editable, .insertable").on("halloactivated", ".field", function(e, data){
+    var $field = $(this);
+  });
 
 
   /** Deactivation: When user unfocues from field, send updates to server: */
-  $(".editable .field").on("hallodeactivated", function(e, data){
-    console.log("Editable has been deactivated by user. Server save likely here.");
-
+  $(".editable").on("hallodeactivated", ".field", function(e, data){
     var $field = $(this);
     var $editable = $field.parents(".editable").first();
 
     if ( $field.hasClass("isModified") ){
       console.log("Content has been modified. Saving");
       var $toggle = $("#edit-mode-toggle");
+
+      // TODO: Replace direct call to $.ajax with Backbone model interaction
+
       $.ajax({
         type: "PUT",          // PUT maps to update action
         dataType: "json",
@@ -105,9 +98,8 @@ $(function(){
   });
 
 
-
-  /** Insertable: Click Add Content Button: */
-  $(".add-content-button").click(function(e){
+  /** Insertion: Click Add Content Button: */
+  $(".add-content-button").on("click", function(e){
     e.preventDefault();
     var $button = $(this);
     $.get(
@@ -119,15 +111,19 @@ $(function(){
         if (data) {
           $button.hide().after(data);
           console.log("New form item rendered to page.");
-          $("#edit-mode-toggle").trigger("activateEdit");
-          $(".insertable .save-button").click(function(e){
-            e.preventDefault();
-            $(this).parents(".insertable").first().trigger("saveContent");
-          }
         }
       }
     );
     console.log("New content request sent to server.");
+  });
+
+
+  /** Insertion: Trigger a save when user clicks Save button: */
+  $(".insertable").on("click", ".save-button", function(e){
+    e.preventDefault();
+    console.log("Clicking save on button:");
+    console.log( $(this) );
+    $(this).parents(".insertable").first().trigger("saveContent");
   });
 
 
@@ -146,6 +142,8 @@ $(function(){
     console.log("Will send insertable save to "+$saveButton.prop("href"));
     console.log("contentData to send:");
     console.log(contentData);
+
+    // TODO: Replace direct call to $.ajax with Backbone model interaction
 
     $.ajax({
       type: "POST",
@@ -170,5 +168,6 @@ $(function(){
     console.log("Server request for content creation sent to server.");
     $("#edit-mode-toggle").trigger("deactivateEdit");
   });
+
 
 });
