@@ -5,6 +5,7 @@ module ApplicationHelper
 
   # Render a chunk of Markdown content:
   def render_markdown(src)
+    logger.debug "--\nRENDER_MARKDOWN CALLED ON SRC:\n#{src.inspect}\n--"
     @renderer ||= Redcarpet::Render::HTML.new
     @marker ||= Redcarpet::Markdown.new(@renderer, :autolink=>true)
     @marker.render(src).html_safe
@@ -21,7 +22,7 @@ module ApplicationHelper
 
   # Render regions of content from a supporting object within a given layout:
   def render_content_in_layout(layout, object)
-    content = object.content
+    content = object.matter
     layout.gsub /\{\{(.+?)\}\}/ do |tag_invocation|
       if md = tag_invocation.match(/^\{\{\s*?(\w+)(.*?)\}\}$/)
         tag = md[1]
@@ -31,8 +32,14 @@ module ApplicationHelper
         if tag == "content"
 
           if key = tokens["key"]
-            content_tag :span, :class=>"editable", "data-content-type"=>object.class.to_s.underscore, "data-content-id"=>object.id, "data-content-key"=>key do
-              render_markdown object.content.send(key)
+            logger.debug "Within content tag, attempting to render key `#{key}`"
+            content_value = object.matter.send(key)
+            if content_value
+              content_tag :span, :class=>"editable", "data-content-type"=>object.class.to_s.underscore, "data-content-id"=>object.id, "data-content-key"=>key do
+                render_markdown object.matter.send(key)
+              end
+            else
+              content_tag :span, "Content region \"#{key}\" not specified within matter.", :class=>"error parse-error ui-state-error"
             end
           else
             content_tag :span, "Layout tag \"#{tag}\" requires providing a \"key\" attribute for proper parsing.", :class=>"error parse-error ui-state-error"

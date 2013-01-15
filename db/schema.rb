@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103063005) do
+ActiveRecord::Schema.define(:version => 20130115211937) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -28,6 +28,29 @@ ActiveRecord::Schema.define(:version => 20130103063005) do
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
+  create_table "content", :force => true do |t|
+    t.integer  "site_id"
+    t.integer  "parent_id"
+    t.integer  "author_id"
+    t.integer  "position"
+    t.string   "type"
+    t.string   "format",       :limit => 12, :default => "html"
+    t.string   "name"
+    t.string   "slug"
+    t.text     "matter"
+    t.text     "layout"
+    t.text     "properties"
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.datetime "published_at",                                   :null => false
+  end
+
+  add_index "content", ["author_id"], :name => "index_content_on_author_id"
+  add_index "content", ["parent_id"], :name => "index_content_on_parent_id"
+  add_index "content", ["site_id"], :name => "index_content_on_site_id"
+  add_index "content", ["slug"], :name => "index_content_on_slug"
+  add_index "content", ["type"], :name => "index_content_on_type"
+
   create_table "links", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "position"
@@ -38,46 +61,6 @@ ActiveRecord::Schema.define(:version => 20130103063005) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
-
-  create_table "pages", :force => true do |t|
-    t.integer  "parent_id"
-    t.integer  "author_id"
-    t.integer  "position"
-    t.string   "type"
-    t.string   "format",       :limit => 12, :default => "html"
-    t.string   "name"
-    t.string   "slug"
-    t.text     "content"
-    t.text     "layout"
-    t.text     "properties"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
-    t.datetime "published_at"
-  end
-
-  add_index "pages", ["author_id"], :name => "index_pages_on_author_id"
-  add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
-  add_index "pages", ["slug"], :name => "index_pages_on_slug"
-
-  create_table "posts", :force => true do |t|
-    t.integer  "page_id"
-    t.integer  "author_id"
-    t.integer  "position"
-    t.string   "type"
-    t.string   "format",       :limit => 12, :default => "html"
-    t.string   "name"
-    t.string   "slug"
-    t.text     "content"
-    t.text     "layout"
-    t.text     "properties"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
-    t.datetime "published_at"
-  end
-
-  add_index "posts", ["author_id"], :name => "index_posts_on_author_id"
-  add_index "posts", ["page_id"], :name => "index_posts_on_page_id"
-  add_index "posts", ["slug"], :name => "index_posts_on_slug"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

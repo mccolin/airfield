@@ -24,7 +24,7 @@
       <% end %>
     <% end %>
 
-    <span class="field" data-content-key="content"><%= render_markdown(post.content) %></span>
+    <span class="field" data-content-key="content"><%= render_markdown(post.matter) %></span>
 
     <% unless post.category_list.blank? %>
     <ul class="categories">
