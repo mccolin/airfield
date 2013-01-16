@@ -27,7 +27,7 @@ end
 gem "jquery-rails"
 gem "activeadmin", "~> 0.5.1"
 gem "sass-rails", "~> 3.2.3"
-gem "doeskeyvalue", "~> 0.9.0"            # Pre-release, but live
+gem "doeskeyvalue", "~> 0.9.1"            # Pre-release, but live
 gem "redcarpet", "~> 2.2.2"               # Markdown render support
 gem "stringex", "~> 1.5.1"                # Sluggable URLs
 gem "acts-as-taggable-on", "~> 2.3.3"     # Taxonomy
