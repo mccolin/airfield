@@ -31,7 +31,12 @@ gem "doeskeyvalue", "~> 0.9.1"            # Pre-release, but live
 gem "redcarpet", "~> 2.2.2"               # Markdown render support
 gem "stringex", "~> 1.5.1"                # Sluggable URLs
 gem "acts-as-taggable-on", "~> 2.3.3"     # Taxonomy
-gem "liquid", "~> 2.4.1"                  # Templating, Layout
+gem "liquid", "~> 2.4.1"                  # Templating, Layout (bracketed)
+#gem "radius", "~> 0.7.3"                  # Templating, Layout (XML-style)
+
+gem "axtags", "~> 0.1.0"
+#gem "axtags", :path=>"/Users/colin/git/mccolin/axtags"
+
 gem "font-awesome-rails", "~> 0.4.1"      # FontAwesome used by Hallo.js editor
 gem "kaminari"                            # Pagination
 gem "has_heartbeat", "~> 0.1.1"           # Heartbeat for uptime monitoring

@@ -89,4 +89,10 @@ module SiteHelper
     ]
   end
 
+
+  # Render Radius-based templates:
+  def render_axtags(template)
+    AirfieldTagLibrary.parse(template)
+  end
+
 end
