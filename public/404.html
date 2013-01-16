@@ -1,26 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
+  <title>Not Found - 404 - I Am McColin</title>
+  <link href="/assets/application.css" media="all" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
+
+  <header id="header-container">
+    <div id="header">
+      <h1>Hello. I'm Colin McCloskey</h1><br/>
+      <h2>And I just cannot find what you're looking for.</h2>
+    </div> <!--/#header-->
+    <div id="navigation-container">
+      <ul id="navigation">
+        <li class=""><a href="/"><i class='icon-home'></i> Home</a></li>
+      </ul>
+    </div> <!--/#navigation-container-->
+    <div class="clearfix"></div>
+  </header>
+
+  <div id="content-container">
+    <div id="content">
+      <article style="min-height:100%;">
+        <h1>Oh no! That's not here!</h1>
+        <p>
+          The page you are looking for doesn't exist. We'd like to be nice and tell you it moved to a new
+          spot, but chances are it never existed. Perhaps you were referred here by a link from a parallel
+          dimension. Or maybe you typed something willy-nilly into the address bar and hoped for the best.
+        </p>
+        <p>
+          Whatever the cause, we invite you to <a href="javascript:history.go(-1);">take one step back</a>
+          or even <a href="/?ref=404">visit our homepage</a>.
+        </p>
+      </article>
+      <div class="clearfix"></div>
+    </div>
+  </div> <!--#content-container-->
+
+  <footer id="footer-container">
+    <div id="footer">
+      <ul id="footer-navigation">
+        <li class=""><a href="/">Home</a></li>
+      </ul>
+      <span id="powered-by">
+        &copy; 2013 Colin McCloskey is powered by many things, among them the misdirection those who befall his
+        404 page.
+      </span><br/>
+      <span id="site-powered-by">
+        This website is powered by <a href="http://github.com/mccolin/airfield">Airfield</a>, a static site and
+        blogging platform from <a href="http://awexomelabs.com/?ref=powered-by&amp;partner=mccolin">Awexome Labs</a>.
+      </span>
+    </div>
+  </footer>
+
+
 </body>
 </html>

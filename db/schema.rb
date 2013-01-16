@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115211937) do
+ActiveRecord::Schema.define(:version => 20130115222648) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -61,6 +61,18 @@ ActiveRecord::Schema.define(:version => 20130115211937) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+  create_table "sites", :force => true do |t|
+    t.string   "name"
+    t.string   "domain"
+    t.string   "subdomain"
+    t.text     "properties"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sites", ["domain"], :name => "index_sites_on_domain"
+  add_index "sites", ["subdomain"], :name => "index_sites_on_subdomain"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

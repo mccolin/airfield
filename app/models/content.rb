@@ -8,6 +8,7 @@ class Content < ActiveRecord::Base
   self.table_name = "content"
 
   # Relationships:
+  belongs_to :site
   belongs_to :author, :class_name=>"User"
   belongs_to :parent, :class_name=>"Content"
   has_many :children, :class_name=>"Content", :foreign_key=>"parent_id"
