@@ -19,11 +19,12 @@ class SiteController < ApplicationController
 
   # Site Homepage
   def index
-    @posts = if @site.home_blog
-      @site.posts.order("created_at DESC").page(params[:page] || 1).per(5)    # published()
-    else
-      Post.where(:id=>nil)
+    if home_page_id = @site.home_page_id
+      redirect_to page_path(@site.pages.where(:id=>@site.home_page_id).first)
+      return
     end
+
+    @posts = @site.posts.order("created_at DESC").page(params[:page] || 1).per(5)    # published()
   end
 
   # View a static page
