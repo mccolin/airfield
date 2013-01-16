@@ -42,12 +42,15 @@ class SiteController < ApplicationController
 
   # View a static post
   def post
-    @post = @site.posts.where(:slug=>params[:id]).first() || Post.where(:id=>params[:id]).first()
-    @page_title = @post.name
+    if @post = @site.posts.where(:slug=>params[:id]).first() || Post.where(:id=>params[:id]).first()
+      @page_title = @post.name
 
-    respond_to do |fmt|
-      fmt.html
-      fmt.text if @post.markdown?
+      respond_to do |fmt|
+        fmt.html
+        fmt.text if @post.markdown?
+      end
+    else
+      raise ActiveRecord::RecordNotFound.new
     end
   end
 
