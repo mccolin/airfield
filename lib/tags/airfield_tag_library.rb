@@ -16,7 +16,11 @@ class AirfieldTagLibrary < AxTags::TagLibrary
     }.merge(tag.attr)
     attrs["scope"] = "published" unless Content.respond_to?(attrs["scope"])
 
-    contents = Content.of_type(attrs["type"]).order(attrs["order"]).send(attrs["scope"]).page(attrs["page"]).per(attrs["per"])
+    contents = if tag.globals.content
+      [tag.globals.content].flatten
+    else
+      Content.of_type(attrs["type"]).order(attrs["order"]).send(attrs["scope"]).page(attrs["page"]).per(attrs["per"])
+    end
 
     inner_text = %{\n<span data-content-collection="#{attrs["type"]}" data-content-count="#{contents.count}">}
     contents.each do |c|
