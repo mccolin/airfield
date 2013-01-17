@@ -14,6 +14,7 @@ class Content < ActiveRecord::Base
   has_many :children, :class_name=>"Content", :foreign_key=>"parent_id"
 
   # Scopes:
+  scope :of_type, lambda {|t| where(:type=>t) }
   scope :published, lambda { where(["`content`.`published_at` <= ?", DateTime.now])}
   scope :unpublished, lambda { where(["`content`.`published_at` IS NULL OR `content`.`published_at` > ?", DateTime.now])}
 
