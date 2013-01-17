@@ -4,8 +4,6 @@
 # Create a testable tag library:
 class AirfieldTagLibrary < AxTags::TagLibrary
 
-  include ActionView::Helpers::UrlHelper
-
   # Scope a region of content and render inner text within:
   #  TODO: parsing locals need to pass current page
   tag "content" do |tag|
