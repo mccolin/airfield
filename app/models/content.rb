@@ -14,8 +14,8 @@ class Content < ActiveRecord::Base
   has_many :children, :class_name=>"Content", :foreign_key=>"parent_id"
 
   # Scopes:
-  scope :published, where(["published_at != ?", nil])
-  scope :unpublished, where(:published_at=>nil)
+  scope :published, lambda { where(["`content`.`published_at` <= ?", DateTime.now])}
+  scope :unpublished, lambda { where(["`content`.`published_at` IS NULL OR `content`.`published_at` > ?", DateTime.now])}
 
   # Attributes:
   attr_accessible :site_id, :parent_id, :author_id, :position, :type, :format, :name, :slug,

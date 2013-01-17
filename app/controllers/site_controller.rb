@@ -24,7 +24,7 @@ class SiteController < ApplicationController
       return
     end
 
-    @posts = @site.posts.order("created_at DESC").page(params[:page] || 1).per(5)    # published()
+    @posts = @site.posts.published().order("published_at DESC").page(params[:page] || 1).per(5)
   end
 
   # View a static page
@@ -43,7 +43,7 @@ class SiteController < ApplicationController
 
   # View a static post
   def post
-    if @post = @site.posts.where(:slug=>params[:id]).first() || Post.where(:id=>params[:id]).first()
+    if @post = @site.posts.published().where(:slug=>params[:id]).first() || Post.published().where(:id=>params[:id]).first()
       @page_title = @post.name
 
       respond_to do |fmt|
