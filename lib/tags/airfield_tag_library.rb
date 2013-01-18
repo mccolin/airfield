@@ -22,12 +22,12 @@ class AirfieldTagLibrary < AxTags::TagLibrary
       Content.of_type(attrs["type"]).order(attrs["order"]).send(attrs["scope"]).page(attrs["page"]).per(attrs["per"])
     end
 
-    inner_text = %{\n<span data-content-collection="#{attrs["type"]}" data-content-count="#{contents.count}">}
+    inner_text = %{<span data-content-collection="#{attrs["type"]}" data-content-count="#{contents.count}">\n}
     contents.each do |c|
       tag.locals.content = c
-      inner_text << %{<span data-content-item="#{c.id}" data-content-type="#{c.class.to_s}">\n} << tag.expand << %{\n</span>\n}
+      inner_text << %{<span data-content-item="#{c.id}" data-content-type="#{c.class.to_s}">\n} << tag.expand << %{\n</span> <!--/item-->}
     end
-    inner_text << %{\n</span> <!--/content-->\n\n}
+    inner_text << %{\n</span> <!--/collection-->\n\n}
   end
 
 
