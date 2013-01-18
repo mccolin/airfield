@@ -25,7 +25,7 @@ class AirfieldTagLibrary < AxTags::TagLibrary
     inner_text = %{<span data-content-collection="#{attrs["type"]}" data-content-count="#{contents.count}">\n}
     contents.each do |c|
       tag.locals.content = c
-      inner_text << %{<span data-content-item="#{c.id}" data-content-type="#{c.class.to_s}">\n} << tag.expand << %{\n</span> <!--/item-->}
+      inner_text << %{<span data-content-item="#{c.id}" data-content-type="#{c.class.to_s}">\n} << tag.expand << %{\n</span> <!--/item-->\n}
     end
     inner_text << %{\n</span> <!--/collection-->\n\n}
   end
