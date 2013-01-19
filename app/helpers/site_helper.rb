@@ -46,6 +46,17 @@ module SiteHelper
   end
 
 
+  # Render a container block for a collection of content with appropriate HTML wrappers:
+  def content_collection(content_set, opts={}, &block)
+    html_attribs = {"data-content-collection"=>content_set.first.class.to_s, "data-content-count"=>content_set.count}
+    html_attribs.merge!(opts[:html]) if opts[:html]
+    html_tag_name = opts[:tag] || :span
+    content_tag html_tag_name, html_attribs do
+      capture(&block)
+    end
+  end
+
+
   # Render a container block for an individual content item with appropriate HTML wrappers:
   def content_container(content_obj, opts={}, &block)
     html_attribs = {"data-content-type"=>content_obj.class.to_s, "data-content-item"=>content_obj.id}

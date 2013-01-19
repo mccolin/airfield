@@ -5,7 +5,9 @@
 
 <%=btn_link_to "Add New Post", new_content_path(), :icon=>"plus", :class=>"add-content-button edit-ui", "data-content-type"=>"post" %>
 
-<%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
+<%=content_collection @posts do %>
+  <%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
+<% end # content_collection %>
 
 <div id="pagination">
   <%=link_to_previous_page @posts, "<i class='icon-arrow-left'></i> Newer Posts".html_safe %>
