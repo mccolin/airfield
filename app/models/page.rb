@@ -1,6 +1,6 @@
 # AIRFIELD
 # Page -- Top-level static page
 
-class Page < ActiveRecord::Base # temp. save: Content
+class Page < Content
 
 end

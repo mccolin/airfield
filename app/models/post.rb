@@ -1,7 +1,7 @@
 # AIRFIELD
 # Post -- A single post of content
 
-class Post < ActiveRecord::Base # temp. save: Content
+class Post < Content
 
   # Post taxonomy:
   acts_as_taggable_on :categories
