@@ -36,13 +36,12 @@ ActiveAdmin.register Page do
       row :updated_at
     end
 
-    page.content.each do |content_key, content_value|
-      panel "#{content_key.capitalize} Content" do
-        div(:style=>"padding:10px; margin: 1em 2em;") do
-          render_markdown(content_value)
-        end
+    panel "View" do
+      div(:style=>"padding:10px; margin: 1em 2em;") do
+        render_markdown(page.matter)
       end
     end
+
   end
 
   # Customize the Form

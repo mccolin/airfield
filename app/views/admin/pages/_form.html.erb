@@ -10,18 +10,7 @@
     <%= f.input :author, :hint=>"The author of record for this page" %>
     <%= f.input :format, :as=>:select, :collection=>%w(html markdown), :hint=>"Airfield will support embedded HTML or Markdown formats" %>
 
-    <% # f.input :content, :input_html=>{:class=>"markdown"} %>
-
-    <% @page.content.each do |key, value| %>
-      <%= f.input "content", :input_html=>{
-              :id=>"#{f.object.class.to_s.downcase}_content_#{key}",
-              :name=>"#{f.object.class.to_s.downcase}[content][#{key}]",
-              :value=>value,
-              :class=>"markdown"},
-            :label=>key.capitalize,
-            :hint=>"Provide content for the #{key} content region." %>
-    <% end %>
-
+    <%= f.input :matter, :input_html=>{class:"markdown"}, :label=>"Body", :hint=>"Body content for this page" %>
 
     <%= f.input :layout, :input_html=>{:class=>"markdown"} %>
   <% end # f.inputs %>

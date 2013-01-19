@@ -36,9 +36,9 @@ ActiveAdmin.register Post do
       row :published_at
       row :updated_at
     end
-    panel "Body Content" do
+    panel "Body" do
       div(:style=>"padding:10px; margin: 1em 2em;") do
-        render_markdown(post.content)
+        render_markdown(post.matter)
       end
     end
   end

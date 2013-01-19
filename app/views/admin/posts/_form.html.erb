@@ -9,7 +9,7 @@
     <%= f.input :author, :hint=>"The author of record for this page" %>
     <%= f.input :published_at, :hint=>"Sort date and display date for pre- or post-publishing" %>
     <%= f.input :format, :as=>:select, :collection=>%w(html markdown), :hint=>"Airfield will support embedded HTML or Markdown formats" %>
-    <%= f.input :content, :input_html=>{:class=>"markdown"} %>
+    <%= f.input :matter, :input_html=>{:class=>"markdown"}, :label=>"Body" %>
     <%= f.input :category_list, :hint=>"Categories in which to display this post" %>
   <% end # f.inputs %>
   <%= f.actions do %>
