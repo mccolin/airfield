@@ -24,7 +24,7 @@
       <% end %>
     <% end %>
 
-    <%= content_attribute(post, :matter) do %>
+    <%= content_attribute(post, :matter, :html=>{class:"field"}) do %>
       <%= render_markdown(post.matter) %>
     <% end %>
 

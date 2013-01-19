@@ -11,20 +11,23 @@ $(function(){
     var $toggle = $(this);
     if ($toggle.hasClass("highlight")) {
       $toggle.removeClass("highlight").html( $toggle.html().replace("Editing...","Edit") )
-      $(".editable, .insertable").trigger("disableEdit");
+      $("[data-content-item]").trigger("disableEdit");
+      // TODO: Insertable
     }
     else {
       $toggle.addClass("highlight").html( $toggle.html().replace("Edit","Editing...") )
-      $(".editable, .insertable").trigger("enableEdit");
+      $("[data-content-item]").trigger("enableEdit");
+      // TODO: Insertable
     }
   });
 
 
   /**
   /* Editable/Insertable: Enable editing mode: **/
-  $(".editable, .insertable").on("enableEdit", function(e){
+  // PREVIOUS: $(".editable, .insertable").on("enableEdit", function(e){...});
+  $("[data-content-item]").on("enableEdit", function(e){
     var $container = $(this);
-    var $fields = $container.find(".field");
+    var $fields = $container.find("[data-content-attr]");
     $fields.addClass("activated").hallo({
       editable: true,
       toolbar: "halloToolbarContextual",    // halloToolbarFixed
@@ -44,9 +47,10 @@ $(function(){
 
   /**
   /* Editable/Insertable: Disable the current editing mode: */
-  $(".editable, .insertable").on("disableEdit", function(e){
+  // PREVIOUS: $(".editable, .insertable").on("disableEdit", function(e){...});
+  $("[data-content-item]").on("disableEdit", function(e){
     var $container = $(this);
-    var $fields = $container.find(".field");
+    var $fields = $container.find("[data-content-attr]");
     $fields.removeClass("activated").hallo({editable:false});
   });
 
@@ -62,38 +66,37 @@ $(function(){
 
   /**
   /* Activation: When user focues on field, take action: */
-  $(".editable, .insertable").on("halloactivated", ".field", function(e, data){
+  // PREVIOUS: $(".editable, .insertable").on("halloactivated", ".field", function(e, data){...});
+  $("[data-content-item]").on("halloactivated", "[data-content-attr]", function(e, data){
     var $field = $(this);
   });
 
 
   /** Deactivation: When user unfocues from field, send updates to server: */
-  $(".editable").on("hallodeactivated", ".field", function(e, data){
+  // PREVIOUS: $(".editable").on("hallodeactivated", ".field", function(e, data){...});
+  $("[data-content-item]").on("hallodeactivated", "[data-content-attr]", function(e, data){
     var $field = $(this);
-    var $editable = $field.parents(".editable").first();
+    var $container = $field.parents("[data-content-item]").first();
 
     if ( $field.hasClass("isModified") ){
       console.log("Content has been modified. Saving");
       var $toggle = $("#edit-mode-toggle");
-
-      // TODO: Replace direct call to $.ajax with Backbone model interaction
-
-      $.ajax({
-        type: "PUT",          // PUT maps to update action
-        dataType: "json",
-        url: $toggle.prop("href"),
-        data: {
-          type: $editable.attr("data-content-type"),
-          id: $editable.attr("data-content-id"),
-          key: $field.attr("data-content-key"),
-          value: markdownize($field.html())
+      contentItem = new Airfield.ContentItem({ id: $container.attr("data-content-item") });
+      contentItem.set( $field.attr("data-content-attr"), markdownize($field.html()) );
+      console.log("Airfield.ContentItem object:");
+      contentItem.log();
+      contentItem.save(null, {
+        success: function(model, response, options){
+          alert("Saved!");
+          console.log("Successful save of editable item. Server response:");
+          console.log(response);
         },
-        success: function(data, status, xhr){
-          $field.removeClass("isModified");
-          console.log("Content successfully saved to server.");
+        error: function(model, xhr, options){
+          console.log("Error saving editable item. XHR and options:");
+          console.log(xhr);
+          console.log(options);
         }
       });
-      console.log("Server request for content update sent to server.");
     }
   });
 

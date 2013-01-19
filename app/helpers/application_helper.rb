@@ -5,7 +5,6 @@ module ApplicationHelper
 
   # Render a chunk of Markdown content:
   def render_markdown(src)
-    logger.debug "--\nRENDER_MARKDOWN CALLED ON SRC:\n#{src.inspect}\n--"
     @renderer ||= Redcarpet::Render::HTML.new
     @marker ||= Redcarpet::Markdown.new(@renderer, :autolink=>true)
     @marker.render(src).html_safe
