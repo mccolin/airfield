@@ -58,7 +58,7 @@ class SiteController < ApplicationController
   # View a category of posts
   def category
     @category_name = params[:id]
-    @posts = @site.posts.tagged_with(@category_name, :on=>:categories)
+    @posts = @site.posts.published().order("published_at DESC").tagged_with(@category_name, :on=>:categories).page(params[:page] || 1).per(10)
     @page_title = "#{@category_name} Category"
   end
 
