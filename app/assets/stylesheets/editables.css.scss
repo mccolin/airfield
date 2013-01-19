@@ -26,12 +26,13 @@
 }
 
 
-.edit-ui {
+[data-edit-ui] {
   display: none !important;
 }
-.edit-ui.activated {
+.activated[data-edit-ui] {
   display: inline-block !important;
 }
+
 
 //
 // BUTTONS
@@ -93,7 +94,7 @@
   text-decoration: none;
 }
 
-#content .add-content-button {
+#content .btn[data-button="add"] {
   margin: 1em 0 1em 125px;
 }
 

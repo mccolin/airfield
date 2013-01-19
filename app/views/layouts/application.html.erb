@@ -22,7 +22,7 @@
         <% @links.in_header().each do |link| %>
           <%= site_page_navigation_item(link.name, link.url, :target=>"_blank") %>
         <% end # links %>
-        <%= site_page_navigation_item("<i class='icon-plus'></i> Add Page", new_content_path(), :class=>"edit-ui", :id=>"add-page-button") %>
+        <%= site_page_navigation_item("<i class='icon-plus'></i> Add Page", new_content_path(), "data-edit-ui"=>true, "data-button"=>"add-page") %>
 
         <% if current_user %>
           <%= site_page_navigation_item("<i class='icon-unlock'></i> Logout", destroy_user_session_path(), {}, :style=>"float:right;") %>
