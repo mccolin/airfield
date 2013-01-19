@@ -63,30 +63,5 @@
     </div>
   </footer>
 
-  <!-- Backbone JS -->
-  <script src="http://ajax.cdnjs.com/ajax/libs/underscore.js/1.4.3/underscore-min.js"></script>
-  <script src="http://ajax.cdnjs.com/ajax/libs/backbone.js/0.9.9/backbone-min.js"></script>
-  <script type="text/javascript">
-    (function() {
-      var Airfield = {};
-      window.Airfield = Airfield;
-      Airfield.ContentItem = Backbone.Model.extend({
-        url: "/content",
-        defaults: {}, // name: "New Post", matter: "This is the body text of your new post."
-        toJSON: function(){
-          return _.extend({
-            type: this.type,
-            content: this.attributes
-          });
-        },
-        log: function() {
-          console.log("Airfield Content#"+this.id+":");
-          console.log(this);
-        }
-      });
-    })();
-    console.log("Airfield.ContentItem JS class defined.");
-</script>
-
 </body>
 </html>

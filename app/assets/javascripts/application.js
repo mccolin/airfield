@@ -16,6 +16,8 @@
 //= require jquery_ujs
 //
 //= require jquery-ui
+//= require underscore-min
+//= require backbone-min
 //= require rangy-core-1.2.3
 //= require hallo
 //= require showdown

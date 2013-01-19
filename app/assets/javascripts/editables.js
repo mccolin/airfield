@@ -2,6 +2,27 @@
 // Editables JS -- Functionality associated with in-place editable
 //  content regions.
 
+(function() {
+  var Airfield = {};
+  window.Airfield = Airfield;
+  Airfield.ContentItem = Backbone.Model.extend({
+    url: "/content",
+    defaults: {}, // name: "New Post", matter: "This is the body text of your new post."
+    toJSON: function(){
+      return _.extend({
+        type: this.type,
+        content: this.attributes
+      });
+    },
+    log: function() {
+      console.log("Airfield Content#"+this.id+":");
+      console.log(this);
+    }
+  });
+})();
+console.log("Airfield.ContentItem JS class defined.");
+
+
 $(function(){
 
   /**
