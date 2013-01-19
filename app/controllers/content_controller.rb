@@ -10,7 +10,6 @@ class ContentController < ApplicationController
       content_type = data[:type]
       klass = content_type.camelcase.constantize
       partial_name = "new_#{klass.to_s.downcase.underscore}"
-
       render :partial=>partial_name, :object=>klass.new, :locals=>{}
     rescue NameError => ne
       render :text=>"Error loading new content form for type #{content_type}.", :status=>500

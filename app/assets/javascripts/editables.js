@@ -146,8 +146,12 @@ $(function(){
   $("[data-content-collection]").on("saveContent", "[data-content-new]", function(e){
     e.preventDefault();
     var $insertable = $(this);
+    var $collection = $insertable.parents("[data-content-collection]").first();
 
-    contentItem = new Airfield.ContentItem({type: $insertable.attr("data-content-type")});
+    contentItem = new Airfield.ContentItem({
+      type: $insertable.attr("data-content-type"),
+      site_id: $collection.attr("data-site-id")
+    });
     $insertable.find("[data-content-attr]").each(function(idx, el){
       var $field = $(this);
       contentItem.set( $field.attr("data-content-attr"), $field.html() );
