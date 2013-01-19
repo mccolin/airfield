@@ -1,22 +1,24 @@
 <%
   # AIRFIELD
   # Content / New Post -- template for creating new posts
+
+  post ||= new_post
 -%>
 
-<article id="post-template" class="post in_set insertable" data-content-type="post">
+<%= content_container post, :tag=>"article", :html=>{:class=>"post insertable in_set"} do %>
   <aside class="post-aside">
-    <span class="month" data-content-key="published_at.month"><%= DateTime.now.strftime("%b") %></span><br/>
-    <span class="day" data-content-key="published_at.day"><%= DateTime.now.strftime("%d") %></span><br/>
-    <span class="year" data-content-key="published_at.year"><%= DateTime.now.strftime("%Y") %></span><br/>
+  <% if false %>
+    <%= content_attribute(post, :published_at, :html=>{class:"month"}) { DateTime.now.strftime("%b") } %> <br/>
+    <%= content_attribute(post, :published_at, :html=>{class:"day"}) { DateTime.now.strftime("%d") } %> <br/>
+    <%= content_attribute(post, :published_at, :html=>{class:"year"}) { DateTime.now.strftime("%Y") } %> <br/>
+  <% end # if false %>
   </aside>
   <section class="post-content">
-    <h1 class="field" data-content-key="name">New Post</h1>
-    <span class="field" data-content-key="content">
-      Change this text to begin editing your new post...
-    </span>
+    <%= content_attribute(post, :name, :tag=>"h1", :html=>{class:"field"}) { "New Post" } %>
+    <%= content_attribute(post, :matter, :html=>{class:"field"}) { "Begin editing your new post, here." } %>
+
+    <% # TODO: Tag List for new content %>
   </section>
 
-
-  <%=btn_link_to "Save Post", content_path(), :icon=>"save", :class=>"save-button" %>
-
-</article>
+  <%=btn_link_to "Save Post", content_path(), :icon=>"save", "data-button"=>"save" %>
+<% end # content_container %>

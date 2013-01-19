@@ -6,46 +6,31 @@ class ContentController < ApplicationController
   # Display a template/form for content creation
   def new
     begin
-      klass = params[:type].camelcase.constantize
+      data = params[:content]
+      content_type = data[:type]
+      klass = content_type.camelcase.constantize
       partial_name = "new_#{klass.to_s.downcase.underscore}"
 
       render :partial=>partial_name, :object=>klass.new, :locals=>{}
     rescue NameError => ne
-      render :text=>"Error loading new content form for type #{params[:type]}.", :status=>500
+      render :text=>"Error loading new content form for type #{content_type}.", :status=>500
     end
   end
+
 
   # Create content
   def create
-    raise Exception.new("Can't create right now");
-    klass = params[:type].camelcase.constantize
-    obj = klass.new()
-    params[:content].each do |idx, data|
-      content_key =  data[:key]
-      content_value = data[:value]
-
-      logger.debug "#{content_key} => #{content_value}"
-
-      if content_key && content_key == "name"
-        obj.name = content_value
-      elsif content_key && content_key != "content"
-        # Strongly-keyed content with regions (like pages):
-        obj.content[content_key] = content_value
-      else
-        # Single text content (like Posts):
-        obj.content = content_value
-      end
+    data = params[:content]
+    begin
+      content = Content.new(data)
+      content.author = current_user if content.respond_to?(:author=)
+      content.save
+      content = content.type.constantize.where(:id=>content.id).first     # <= Load content through appropriate subclass
+      partial_name = content.type.downcase.underscore
+      render :json=>{success:true, content:content, rendered:render_to_string(partial:"site/#{partial_name}", :object=>content, :locals=>{})}
     end
-
-    raise Exception.new("Funky exception")
-
-    obj.author = current_user if obj.respond_to?(:author=)
-    obj.save
-
-    partial_name = klass.to_s.downcase.underscore
-
-    render :json=>{success:true, object:obj, content:obj.content, rendered:render_to_string(:partial=>"site/#{partial_name}", :collection=>[obj], :locals=>{new_record:true})}
   end
+
 
   # Update content
   def update

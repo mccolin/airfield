@@ -101,13 +101,16 @@ $(function(){
   });
 
 
-  /** Insertion: Click Add Content Button: */
-  $(".add-content-button").on("click", function(e){
+  /** Insertion: Clicking the Add Content button pulls a form and inserts it atop the
+   **  collection container for inserting new content. */
+  $("a[data-button=add]").on("click", function(e){
     e.preventDefault();
     var $button = $(this);
+    var $collection = $(this).parents("[data-content-collection]").first();
+
     $.get(
       $button.prop("href"),
-      {type: $button.attr("data-content-type")},
+      { content: {type: $collection.attr("data-content-collection")} },
       function(data, status, xhr){
         console.log("New content response received from server:");
         console.log(data);
@@ -122,53 +125,72 @@ $(function(){
 
 
   /** Insertion: Trigger a save when user clicks Save button: */
-  $(".insertable").on("click", ".save-button", function(e){
+  // PREVIOUS: $(".insertable").on("click", ".save-button", function(e){...});
+  $("[data-content-collection]").on("click", "a[data-button=save]", function(e){
     e.preventDefault();
-    console.log("Clicking save on button:");
-    console.log( $(this) );
-    $(this).parents(".insertable").first().trigger("saveContent");
+    var $button = $(this);
+    var $collection = $button.parents("[data-content-collection]").first();
+    var $item = $button.parents("[data-content-new]").first();
+
+    console.log("Clicking save on button within a collection:");
+    console.log( {button: $button, collection: $collection, item: $item} );
+
+    $item.trigger("saveContent");
+
+    //$(this).parents(".insertable").first().trigger("saveContent");
   });
 
 
   /** Insertable: Save new content to server: */
-  $(".insertable").on("saveContent", function(e){
+  // PREVIOUS: $(".insertable").on("saveContent", function(e){
+  $("[data-content-collection]").on("saveContent", "[data-content-new]", function(e){
     e.preventDefault();
     var $insertable = $(this);
-    var $saveButton = $insertable.find(".save-button").first();
 
-    var contentData = new Array();
-    $insertable.find(".field").each(function(idx, el){
+    contentItem = new Airfield.ContentItem({type: $insertable.attr("data-content-type")});
+    $insertable.find("[data-content-attr]").each(function(idx, el){
       var $field = $(this);
-      contentData.push({key: $field.attr("data-content-key"), value: markdownize($field.html()) });
+      contentItem.set( $field.attr("data-content-attr"), $field.html() );
+    });
+    console.log("Airfield.ContentItem object:");
+    contentItem.log();
+    contentItem.save(null, {
+      success: function(model, response, options){
+        alert("Saved new content!");
+        console.log("Successful save of inserted content. Server response:");
+        console.log(response);
+      },
+      error: function(model, xhr, options){
+        console.log("Error saving inserted content. XHR and options:");
+        console.log(xhr);
+        console.log(options);
+      }
     });
 
-    console.log("Will send insertable save to "+$saveButton.prop("href"));
-    console.log("contentData to send:");
-    console.log(contentData);
 
     // TODO: Replace direct call to $.ajax with Backbone model interaction
 
-    $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: $saveButton.prop("href"),
-      data: {
-        type: $insertable.attr("data-content-type"),
-        content: contentData
-      },
-      success: function(data, status, xhr){
-        console.log("Server response returned to script. Inserting new content, now.");
-        if (data.success && data.rendered) {
-          $insertable.hide().after(data.rendered);
-        } else {
-          $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content</span>");
-        }
-      },
-      error: function(xhr, status, message){
-        $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content: "+message+"</span>");
-      }
-    });
-    console.log("Server request for content creation sent to server.");
+    // $.ajax({
+    //   type: "POST",
+    //   dataType: "json",
+    //   url: $saveButton.prop("href"),
+    //   data: {
+    //     type: $insertable.attr("data-content-type"),
+    //     content: contentData
+    //   },
+    //   success: function(data, status, xhr){
+    //     console.log("Server response returned to script. Inserting new content, now.");
+    //     if (data.success && data.rendered) {
+    //       $insertable.hide().after(data.rendered);
+    //     } else {
+    //       $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content</span>");
+    //     }
+    //   },
+    //   error: function(xhr, status, message){
+    //     $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content: "+message+"</span>");
+    //   }
+    // });
+    // console.log("Server request for content creation sent to server.");
     $("#edit-mode-toggle").trigger("deactivateEdit");
   });
 
