@@ -15,8 +15,8 @@ class Content < ActiveRecord::Base
 
   # Scopes:
   scope :of_type, lambda {|t| where(:type=>t) }
-  scope :published, lambda { where(["`content`.`published_at` <= ?", DateTime.now])}
-  scope :unpublished, lambda { where(["`content`.`published_at` IS NULL OR `content`.`published_at` > ?", DateTime.now])}
+  scope :published, lambda { where(["published_at <= ?", DateTime.now])}
+  scope :unpublished, lambda { where(["published_at IS NULL OR published_at > ?", DateTime.now])}
 
   # Attributes:
   attr_accessible :site_id, :parent_id, :author_id, :position, :type, :format, :name, :slug,
