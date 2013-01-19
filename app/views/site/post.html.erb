@@ -3,7 +3,7 @@
   # Site / Post
 -%>
 
-<span class="editable" data-content-type="post" data-content-id="<%=@post.id-%>">
-  <h1 class="field" data-content-key="name"><%= @post.name %></h1>
-  <%=render :partial=>"post", :object=>@post, :locals=>{:hide_title=>true} %>
-</span>
+<%= content_container @post, :html=>{class:"editable"} do %>
+  <%= content_attribute(@post, :name, :tag=>"h1", :html=>{class:"field"}) %>
+<% end %>
+<%=render :partial=>"post", :object=>@post, :locals=>{:hide_title=>true} %>
