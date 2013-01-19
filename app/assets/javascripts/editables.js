@@ -22,11 +22,22 @@ $(function(){
   });
 
 
-  /**
-  /* Editable/Insertable: Enable editing mode: **/
-  // PREVIOUS: $(".editable, .insertable").on("enableEdit", function(e){...});
-  $("[data-content-item]").on("enableEdit", function(e){
-    var $container = $(this);
+  /** Markdown Conversion: Support HTML->Markdown processing: */
+  var markdownize = function(content) {
+    var html = content.split("\n").map($.trim).filter(function(line) {
+      return line != "";
+    }).join("\n");
+    return toMarkdown(html);
+  };
+
+
+  /*** EDITING * EDITING * EDITING * EDITING * EDITING * EDITING * EDITING * EDITING * EDITING * EDITING ***/
+
+
+  /** Make content fields within the given content container editable: */
+  function makeEditable($container) {
+    console.log("makeEditable called for container:");
+    console.log($container);
     var $fields = $container.find("[data-content-attr]");
     $fields.addClass("activated").hallo({
       editable: true,
@@ -42,39 +53,37 @@ $(function(){
         "halloimage": {}
       }
     });
-  });
+  }
 
-
-  /**
-  /* Editable/Insertable: Disable the current editing mode: */
-  // PREVIOUS: $(".editable, .insertable").on("disableEdit", function(e){...});
-  $("[data-content-item]").on("disableEdit", function(e){
-    var $container = $(this);
+  /** Revoke edit abilities from content fields within the given container: */
+  function revokeEditable($container) {
     var $fields = $container.find("[data-content-attr]");
     $fields.removeClass("activated").hallo({editable:false});
+  }
+
+
+  /** Editable: Enable editing mode for existing on-page content: **/
+  // PREVIOUS: $("[data-content-item]").on("enableEdit", function(e){
+  $("body").on("enableEdit", "[data-content-item]", function(e){
+    makeEditable( $(this) );
   });
 
 
-  /** Markdown Conversion: Support HTML->Markdown processing: */
-  var markdownize = function(content) {
-    var html = content.split("\n").map($.trim).filter(function(line) {
-      return line != "";
-    }).join("\n");
-    return toMarkdown(html);
-  };
-
-
-  /**
-  /* Activation: When user focues on field, take action: */
-  // PREVIOUS: $(".editable, .insertable").on("halloactivated", ".field", function(e, data){...});
-  $("[data-content-item]").on("halloactivated", "[data-content-attr]", function(e, data){
-    var $field = $(this);
+  /** Editable: Disable the current editing mode for existing on-page content: */
+  //$("[data-content-item]").on("disableEdit", function(e){
+  $("body").on("disableEdit", "[data-content-item]", function(e){
+    revokeEditable( $(this) );
   });
 
 
-  /** Deactivation: When user unfocues from field, send updates to server: */
-  // PREVIOUS: $(".editable").on("hallodeactivated", ".field", function(e, data){...});
-  $("[data-content-item]").on("hallodeactivated", "[data-content-attr]", function(e, data){
+  /** Editable: Take action when a user focused on an editable field: */
+  // PREVIOUS: $("[data-content-item]").on("halloactivated", "[data-content-attr]", function(e, data){});
+  $("body").on("halloactivated", "[data-content-item] [data-content-attr]", function(e, data){});
+
+
+  /** Editable: Send updates to server when a user blurs from an editable field: */
+  // PREVIOUS: $("[data-content-item]").on("hallodeactivated", "[data-content-attr]", function(e, data){
+  $("body").on("hallodeactivated", "[data-content-item] [data-content-attr]", function(e, data){
     var $field = $(this);
     var $container = $field.parents("[data-content-item]").first();
 
@@ -101,8 +110,11 @@ $(function(){
   });
 
 
-  /** Insertion: Clicking the Add Content button pulls a form and inserts it atop the
-   **  collection container for inserting new content. */
+
+  /*** INSERTION * INSERTION * INSERTION * INSERTION * INSERTION * INSERTION * INSERTION * INSERTION ***/
+
+
+  /** Insertable: Pull a template for new content and place it atop a collection for editing: */
   $("a[data-button=add]").on("click", function(e){
     e.preventDefault();
     var $button = $(this);
@@ -116,7 +128,10 @@ $(function(){
         console.log(data);
         if (data) {
           $button.hide().after(data);
-          console.log("New form item rendered to page.");
+          $newTemplate = $collection.find("[data-content-new]").first();
+          console.log("New form item rendered to page. Element:");
+          console.log($newTemplate);
+          $newTemplate.trigger("enableEdit");
         }
       }
     );
@@ -124,25 +139,41 @@ $(function(){
   });
 
 
-  /** Insertion: Trigger a save when user clicks Save button: */
-  // PREVIOUS: $(".insertable").on("click", ".save-button", function(e){...});
-  $("[data-content-collection]").on("click", "a[data-button=save]", function(e){
-    e.preventDefault();
-    var $button = $(this);
-    var $collection = $button.parents("[data-content-collection]").first();
-    var $item = $button.parents("[data-content-new]").first();
-
-    console.log("Clicking save on button within a collection:");
-    console.log( {button: $button, collection: $collection, item: $item} );
-
-    $item.trigger("saveContent");
-
-    //$(this).parents(".insertable").first().trigger("saveContent");
+  /** Insertable: Enable editing mode on newly-inserted content within a collection: */
+  $("[data-content-collection]").on("enableEdit", "[data-content-new]", function(e){
+    alert("Edit mode enabled for a data-content-new:");
+    console.log("enableEdit triggered for insertion template:");
+    console.log( $(this) );
+    makeEditable( $(this) );
   });
 
 
-  /** Insertable: Save new content to server: */
-  // PREVIOUS: $(".insertable").on("saveContent", function(e){
+  /** Insertable: Disable editing mode on newly-inserted content within a collection: */
+  $("[data-content-collection]").on("disableEdit", "[data-content-new]", function(e){
+    alert("Edit mode disabled for a data-content-new");
+    revokeEditable( $(this) );
+  });
+
+
+  /** Insertable: Trigger save event for new content when user clicks Save button: */
+  $("[data-content-collection]").on("click", "a[data-button=save]", function(e){
+    e.preventDefault();
+    var $button = $(this);
+    //var $collection = $button.parents("[data-content-collection]").first();
+    var $item = $button.parents("[data-content-new]").first();
+    $item.trigger("saveContent");
+  });
+
+  /** Insertable: Remove the new content template when user clicks Cancel button: */
+  $("[data-content-collection]").on("click", "a[data-button=cancel]", function(e){
+    e.preventDefault();
+    var $button = $(this);
+    var $item = $button.parents("[data-content-new]").first();
+    $item.remove();
+  });
+
+
+  /** Insertable: Send create request to server for new content: */
   $("[data-content-collection]").on("saveContent", "[data-content-new]", function(e){
     e.preventDefault();
     var $insertable = $(this);
