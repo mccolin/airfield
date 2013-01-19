@@ -100,7 +100,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    liquid (2.4.1)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -185,7 +184,6 @@ DEPENDENCIES
   has_heartbeat (~> 0.1.1)
   jquery-rails
   kaminari
-  liquid (~> 2.4.1)
   mysql2
   newrelic_rpm
   pg
