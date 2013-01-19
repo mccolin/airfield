@@ -3,7 +3,8 @@
   # Site / Page
 -%>
 
-<h1><%= @page.name %></h1>
-
+<%= content_container @page, :html=>{class:"editable"} do %>
+  <%= content_attribute(@page, :name, :tag=>"h1", :html=>{class:"field"}) %>
+<% end %>
 <%=render :partial=>"page", :object=>@page, :locals=>{:hide_title=>true} %>
 
