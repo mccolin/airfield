@@ -59,7 +59,7 @@ class SiteController < ApplicationController
   def category
     @category_name = params[:id]
     @posts = @site.posts.tagged_with(@category_name, :on=>:categories)
-    @page_title = @category_name
+    @page_title = "#{@category_name} Category"
   end
 
 

@@ -5,5 +5,10 @@
 
 <h1><%=@category_name.capitalize%> Category</h1>
 
-<%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
+<%=content_collection @posts do %>
+  <%=render :partial=>"post", :collection=>@posts, :locals=>{} %>
+<% end # content_collection %>
+
+
+
 
