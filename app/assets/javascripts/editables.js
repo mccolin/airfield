@@ -160,41 +160,17 @@ $(function(){
     contentItem.log();
     contentItem.save(null, {
       success: function(model, response, options){
-        alert("Saved new content!");
         console.log("Successful save of inserted content. Server response:");
         console.log(response);
+        $insertable.hide().after(response.rendered);
       },
       error: function(model, xhr, options){
+        $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content</span>");
         console.log("Error saving inserted content. XHR and options:");
         console.log(xhr);
         console.log(options);
       }
     });
-
-
-    // TODO: Replace direct call to $.ajax with Backbone model interaction
-
-    // $.ajax({
-    //   type: "POST",
-    //   dataType: "json",
-    //   url: $saveButton.prop("href"),
-    //   data: {
-    //     type: $insertable.attr("data-content-type"),
-    //     content: contentData
-    //   },
-    //   success: function(data, status, xhr){
-    //     console.log("Server response returned to script. Inserting new content, now.");
-    //     if (data.success && data.rendered) {
-    //       $insertable.hide().after(data.rendered);
-    //     } else {
-    //       $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content</span>");
-    //     }
-    //   },
-    //   error: function(xhr, status, message){
-    //     $insertable.hide().after("<span class=\"error parse-error ui-state-error\">Failed to save new content: "+message+"</span>");
-    //   }
-    // });
-    // console.log("Server request for content creation sent to server.");
     $("#edit-mode-toggle").trigger("deactivateEdit");
   });
 
