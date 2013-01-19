@@ -35,7 +35,7 @@ $(function(){
       toolbarPositionAbove: true,
       plugins: {
         "halloformat": {},
-        "halloheadings": {headers: [2,3]},
+        "halloheadings": {headers: [2,3,4]},
         // "hallojustify": {},
         "hallolists": {},
         "hallolink": {},
