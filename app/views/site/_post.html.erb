@@ -9,22 +9,24 @@
   hide_title ||= false
 -%>
 
-<article id="post-<%=post.id%>" class="post editable <%=cycle("even", "odd")%> <%= post_counter ? "in_set" : "solo" %>" data-content-type="post" data-content-id="<%=post.id-%>">
+<%= content_container post, :tag=>"article", :html=>{id:"post-#{post.id}", class:"post editable #{cycle("even","odd")} #{post_counter ? "in_set" : "solo"}"} do %>
   <aside class="post-aside">
-    <span class="month"><%= post.published_at.strftime("%b") %></span><br/>
-    <span class="day"><%= post.published_at.strftime("%d") %></span><br/>
-    <span class="year"><%= post.published_at.strftime("%Y") %></span><br/>
+    <%= content_attribute(post, :published_at, :html=>{class:"month"}) { post.published_at.strftime("%b") } %> <br/>
+    <%= content_attribute(post, :published_at, :html=>{class:"day"}) { post.published_at.strftime("%d") } %> <br/>
+    <%= content_attribute(post, :published_at, :html=>{class:"year"}) { post.published_at.strftime("%Y") } %> <br/>
   </aside>
   <section class="post-content">
     <% unless hide_title %>
       <% if post_counter %>
-        <h1><%=link_to post.name, post_path(post) %></h1>
+        <%= content_attribute(post, :name, :tag=>"h1", :html=>{class:"field"}) { link_to(post.name, post_path(post)) } %>
       <% else %>
-        <h1 class="field" data-content-key="name"><%= post.name %></h1>
+        <%= content_attribute(post, :name, :tag=>"h1", :html=>{class:"field"}) %>
       <% end %>
     <% end %>
 
-    <span class="field" data-content-key="content"><%= render_markdown(post.matter) %></span>
+    <%= content_attribute(post, :matter) do %>
+      <%= render_markdown(post.matter) %>
+    <% end %>
 
     <% unless post.category_list.blank? %>
     <ul class="categories">
@@ -35,6 +37,6 @@
     </ul>
     <% end %>
   </section>
-</article>
+<% end # content_container %>
 
 

@@ -46,6 +46,37 @@ module SiteHelper
   end
 
 
+  # Render a container block for an individual content item with appropriate HTML wrappers:
+  def content_container(content_obj, opts={}, &block)
+    html_attribs = {"data-content-type"=>content_obj.class.to_s, "data-content-item"=>content_obj.id}
+    html_attribs.merge!(opts[:html]) if opts[:html]
+    html_tag_name = opts[:tag] || :span
+    content_tag html_tag_name, html_attribs do
+      capture(&block)
+    end
+  end
+
+  # Render an editable container block for an attribute or attr/key for content. Given a block,
+  # this method will render the contents of the block as its inner text. Without a block, the
+  # simple text value of the attribute named will be inserted as inner text:
+  def content_attribute(content_obj, attr_name, opts={}, &block)
+    html_attribs = {"data-content-attr"=>attr_name}
+    html_attribs["data-content-key"] = opts[:key] if opts[:key]
+    html_attribs.merge!(opts[:html]) if opts[:html]
+
+    html_tag_name = opts[:tag] || :span
+
+    if block_given?
+      content_tag html_tag_name, html_attribs do
+        capture(&block)
+      end
+    else
+      content_tag html_tag_name, content_obj.send(attr_name), html_attribs
+    end
+  end
+
+
+
   # Select and sanitize a random string from a set
   def random_and_sane(set)
     set[rand(set.length)].html_safe
