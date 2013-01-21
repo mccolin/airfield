@@ -6,6 +6,9 @@ ActiveAdmin.register Page do
   # Menu
   menu :priority=>2
 
+  # Index Sort:
+  config.sort_order = "position_asc"
+
   # Scopes
   scope :all, :default=>true
   scope :published
@@ -14,13 +17,34 @@ ActiveAdmin.register Page do
   # Customize the Index Listing
   index do
     selectable_column
-    column :id
+    #column :id
+    #column :position
     column :name
-    column :format
+    #column :format
     column :author
-    column :created_at
-    column :published_at
+    #column :created_at
+    #column :published_at
     default_actions
+
+    # Helpful Admin Text:
+    panel "Pages Admin" do
+      text_node %{
+        This is a list of the major static pages of your site. Click to view, edit, or delete
+        a page and drag this list to re-order pages as they appear in navigation.
+      }.html_safe
+    end
+  end
+
+
+  # Resort Pages (UI drag-and-drop):
+  # This action is called by javascript when you drag and drop a column
+  # It iterates through the collection and sets the new position based on the
+  # order that jQuery submitted them
+  collection_action :sort, :method => :post do
+    params[:page].each_with_index do |id, index|
+      Page.update_all(['position=?', index+1], ['id=?', id])
+    end
+    render :nothing => true
   end
 
   # Customize the Show view

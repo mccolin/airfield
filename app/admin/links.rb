@@ -6,6 +6,9 @@ ActiveAdmin.register Link do
   # Menu
   menu :priority=>9
 
+  # Index Sort:
+  config.sort_order = "position_asc"
+
   # No need for show view:
   actions :all, :except => [:show]
 
@@ -17,7 +20,7 @@ ActiveAdmin.register Link do
   # Customize the Index Listing
   index do
     selectable_column
-    column :id
+    #column :id
     column "Where" do |link|
       if link.in_header? && link.in_footer?
         status_tag("Both", :ok)
@@ -29,11 +32,31 @@ ActiveAdmin.register Link do
         status_tag("None", :error)
       end
     end
-    column :position
+    #column :position
     column :name
     column :url
     default_actions
+    panel "Menu Links Admin" do
+      text_node %{
+        Use this screen to manage the external links appearing in your menus. Drag
+        links into the desired order and specify if they should appear in the top menu,
+        bottom menu, or both.
+      }.html_safe
+    end
   end
+
+
+  # Resort Links (UI drag-and-drop):
+  # This action is called by javascript when you drag and drop a column
+  # It iterates through the collection and sets the new position based on the
+  # order that jQuery submitted them
+  collection_action :sort, :method => :post do
+    params[:link].each_with_index do |id, index|
+      Link.update_all(['position=?', index+1], ['id=?', id])
+    end
+    render :nothing => true
+  end
+
 
   # Customize the Form
   form do |f|

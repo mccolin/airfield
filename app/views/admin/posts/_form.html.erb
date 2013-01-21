@@ -6,11 +6,14 @@
 <%= semantic_form_for [:admin, @post] do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, :hint=>"The displayed headline/title of the post" %>
-    <%= f.input :author, :hint=>"The author of record for this page" %>
-    <%= f.input :published_at, :hint=>"Sort date and display date for pre- or post-publishing" %>
-    <%= f.input :format, :as=>:select, :collection=>%w(html markdown), :hint=>"Airfield will support embedded HTML or Markdown formats" %>
     <%= f.input :matter, :input_html=>{:class=>"markdown"}, :label=>"Body" %>
     <%= f.input :category_list, :hint=>"Categories in which to display this post" %>
+
+    <hr/>
+
+    <%= f.input :author, :selected=>(@post.author_id || current_user.id), :hint=>"The author of record for this page" %>
+    <%= f.input :published_at, :hint=>"Customize this content's published date or configure post to publish in future" %>
+    <%= f.input :format, :as=>:select, :selected=>"markdown", :collection=>%w(html markdown), :hint=>"Airfield will support embedded HTML or Markdown formats" %>
   <% end # f.inputs %>
   <%= f.actions do %>
     <%= f.action :submit, :label=>"Save Post" %>
