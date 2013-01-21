@@ -4,7 +4,7 @@
 -%>
 
 
-
+<br/>
 <%=content_collection @posts do %>
   <%=btn_link_to "Add New Post", new_content_path(), :icon=>"plus", "data-button"=>"add", "data-edit-ui"=>true %>
   <%=render :partial=>"post", :collection=>@posts, :locals=>{} %>

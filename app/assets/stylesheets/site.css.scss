@@ -1,6 +1,10 @@
 // AIRFIELD
 // Site CSS -- Sass/SCSS rules for site display
 
+// Google Font Set:
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,700|Bree+Serif);
+
+
 .clearfix { clear: both; }
 
 body {
@@ -11,7 +15,8 @@ body {
   //Halloween: background-position: 0 -650px;
   background-attachment: fixed;
   color: #555;
-  font-family: "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  //font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 20px;
   margin: 0;
@@ -29,14 +34,18 @@ body {
   width: 960px;
 }
 
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Bree Serif", serif;
+}
+
 #header h1 {
-  // background: rgba(255,204,15,0.7);  // #FFD700
-  // background: rgba(15,180,80,0.7);  // #FFD700
   background: rgba(81,96,9,0.7);  // #516009
-  //border-radius: 5px;
-  // color: #111;
+  border-radius: 5px;
   color: #FFF;
   display: inline-block;
+  font-family: "Open Sans", sans-serif;
+  font-size: 36px;
+  font-weight: normal;
   letter-spacing: -2px;
   margin: 65px 25px 15px -5px;
   padding: 20px 15px;
@@ -44,11 +53,14 @@ body {
 #header h2 {
   color: #FFF;
   display: inline-block;
-  font-weight: 100;
-  letter-spacing: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  font-weight: lighter;
+  letter-spacing: -1px;
   margin: 0 25px 65px 10px;
   text-shadow: 2px 2px 2px #666;
 }
+
 
 
 //
@@ -163,6 +175,19 @@ ul#footer-navigation li.active {
   padding-top: 0.67em;
 }
 
+#content article h1 {
+  font-size: 24px;
+}
+
+#content h1 a {
+  color: #111;
+  text-decoration: none;
+}
+#content h1 a:hover {
+  color: #111;
+  text-decoration: none;
+}
+
 #pagination {
   clear: both;
   margin: 1em 0;
@@ -219,10 +244,13 @@ ul#footer-navigation li.active {
 }
 .post .post-aside {
   border-right: 1px solid #999;
+  color: rgba(81,96,9,0.7);
+  line-height: 1.2em;
   margin-right: 0.5em;
   padding: 1em 0 0;
   position: absolute;
   text-align: center;
+  text-shadow: 1px 1px 2px #999;
   width: 50px;
   height: 100%;
 }
