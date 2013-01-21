@@ -124,10 +124,13 @@ ul#footer-navigation {
 }
 ul#footer-navigation li {
   display: inline-block;
-  padding: 0.5em 0.25em;
+  padding: 0.5em 0.5em;
+}
+ul#footer-navigation li:first-child {
+  padding-left: 0;
 }
 ul#footer-navigation li a {
-  color: #0F6;
+  color: #9F3;
   text-decoration: none;
 }
 ul#footer-navigation li:hover a {
@@ -162,11 +165,11 @@ ul#footer-navigation li.active {
 }
 
 #content a {
-  color: #039;
+  color: #561; //#039;
   text-decoration: none;
 }
 #content a:hover {
-  color: #00F;
+  color: #791; //#00F;
   text-decoration: underline;
 }
 
@@ -190,11 +193,19 @@ ul#footer-navigation li.active {
 
 #pagination {
   clear: both;
+  font-weight: bold;
   margin: 1em 0;
   text-align: center;
+  text-transform: uppercase;
 }
 #pagination a:first-child {
   padding-right: 1em;
+}
+#pagination a[rel="previous"] {
+  float: left;
+}
+#pagination a[rel="next"] {
+  float: right;
 }
 
 //
