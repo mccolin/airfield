@@ -9,17 +9,28 @@
 
 body {
   background: #FFF;
-  background-image: url(http://farm2.static.flickr.com/1240/553404266_75cc79deda_o.jpg);
-  //Halloween: background-image: url(http://farm6.static.flickr.com/5162/5265426886_2cc4e16cfb_o.jpg);
-  background-position: -400px -350px;
-  //Halloween: background-position: 0 -650px;
-  background-attachment: fixed;
+  //background-image: url(http://farm2.static.flickr.com/1240/553404266_75cc79deda_o.jpg);
+  //background-position: -400px -350px;
+  //background-attachment: fixed;
   color: #555;
-  //font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 20px;
   margin: 0;
+}
+
+#background-wrap {
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url(http://farm2.static.flickr.com/1240/553404266_75cc79deda_o.jpg);
+  //background-size: 100%;
+  background-attachment: fixed;
+  background-position: 60% -350px;  // PREVIOUS: background-position: -400px -350px;
+  background-repeat: repeat-y;
 }
 
 #header-container {
