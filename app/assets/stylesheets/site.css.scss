@@ -176,12 +176,13 @@ ul#footer-navigation li.active {
 }
 
 #content a {
-  color: #561; //#039;
+  color: #791; // #561; //#039;
   text-decoration: none;
 }
 #content a:hover {
   color: #791; //#00F;
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1px dashed #791;
 }
 
 #content h1 {
