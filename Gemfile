@@ -4,7 +4,7 @@
 source "https://rubygems.org"
 
 # Lock in rails version:
-gem "rails", "3.2.8"
+gem "rails", "3.2.11"
 
 # Development dependencies:
 group :development do
