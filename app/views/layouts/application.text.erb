@@ -1,0 +1,13 @@
+<%= site_title %>
+<%= "".ljust(site_title.length,"=") %>
+
+[Site Home Page](<%=home_path(:only_path=>false)-%>)
+[This Document](<%=url_for(:only_path=>false)-%>)
+
+<%= yield %>
+
+
+--
+(C)2013 Colin McCloskey is powered by many things, among them <%=powered_by-%>.
+This website is powered by [Airfield](http://github.com/mccolin/airfield), a static site and
+blogging platform from [Awexome Labs](http://awexomelabs.com/?ref=powered-by&partner=mccolin).
