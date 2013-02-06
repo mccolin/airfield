@@ -41,3 +41,7 @@ gem "font-awesome-rails", "~> 0.4.1"      # FontAwesome used by Hallo.js editor
 gem "kaminari"                            # Pagination
 gem "has_heartbeat", "~> 0.1.1"           # Heartbeat for uptime monitoring
 gem "newrelic_rpm"                        # New Relic perf and uptime pinging
+
+gem "rack-cache", :require=>"rack/cache"  # Caching (required by Dragonfly)
+gem "dragonfly", "~>0.9.13"               # Image upload and service
+gem "fog", "~> 1.9.0"                     # S3 File System (used by Dragonfly)

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   # Relationships:
   has_many :pages, :foreign_key=>"author_id"
   has_many :posts, :foreign_key=>"author_id"
+  has_many :images, :foreign_key=>"author_id"
 
   # Scopes:
   scope :admins, where(:admin=>true)

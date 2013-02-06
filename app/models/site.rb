@@ -7,6 +7,7 @@ class Site < ActiveRecord::Base
   has_many :content, :class_name=>"Content"
   has_many :pages, :class_name=>"Page"
   has_many :posts, :class_name=>"Post"
+  has_many :images
 
   #has_many :children, :class_name=>"Content", :foreign_key=>"parent_id"
 
