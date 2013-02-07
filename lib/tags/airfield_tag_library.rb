@@ -70,6 +70,27 @@ class AirfieldTagLibrary < AxTags::TagLibrary
   end
 
 
+  # Render an image tag for embeddable media
+  tag "image" do |tag|
+    attrs = {
+      "i"=>nil,                     # i: ID of the image to display
+      "class"=>"axtags_image",      # class: HTML class to apply to the rendered image
+      "size"=>nil,                  # size: NxM dimensions (passable to Dragonfly) of desired image
+      "style"=>nil,                 # style: HTML style attribute
+      "alt"=>nil                    # alt: HTML alt attribute
+    }.merge(tag.attr)
+
+    if image = Image.where(:id=>attrs["i"]).first
+      url = attrs["size"] ? image.image.thumb(attrs["size"]).url : image.image.url
+      alt = attrs["alt"] || image.name || "Image"
+      %{<img src="#{url}" data-gallery-image="#{image.id}" alt="#{alt}" title="#{alt}" class="#{attrs["class"]}" style="#{attrs["style"]}" />}
+    else
+      %{<span class="error parse-error ui-state-error">Image not found in Site Media Gallery.</span>}
+    end
+
+  end
+
+
   # Render Markdown content within a given tag
   tag "markdown" do |tag|
     renderer ||= Redcarpet::Render::HTML.new

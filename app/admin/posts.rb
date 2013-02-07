@@ -46,7 +46,7 @@ ActiveAdmin.register Post do
   show do
     panel "Body" do
       div(:style=>"padding:10px; margin: 1em 2em;") do
-        render_markdown(post.matter)
+        render_markdown render_axtags(post.matter)
       end
       div do
         span :class=>"action_item" do

@@ -62,7 +62,7 @@ ActiveAdmin.register Page do
 
     panel "View" do
       div(:style=>"padding:10px; margin: 1em 2em;") do
-        render_markdown(page.matter)
+        render_markdown render_axtags(page.matter)
       end
     end
 

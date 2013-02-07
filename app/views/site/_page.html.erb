@@ -12,7 +12,7 @@
   <% end %>
 
   <%= content_attribute(page, :matter, :html=>{class:"field"}) do %>
-    <%= render_markdown(page.matter) %>
+    <%= render_markdown render_axtags(page.matter) %>
   <% end %>
 
 <% end # content_container %>

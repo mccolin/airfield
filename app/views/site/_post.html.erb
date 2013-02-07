@@ -25,7 +25,7 @@
     <% end %>
 
     <%= content_attribute(post, :matter, :html=>{class:"field"}) do %>
-      <%= render_markdown(post.matter) %>
+      <%= render_markdown render_axtags(post.matter) %>
     <% end %>
 
     <% unless post.category_list.blank? %>

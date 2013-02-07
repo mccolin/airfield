@@ -56,6 +56,15 @@ ActiveAdmin.register Image do
     attributes_table do
       row :name
       row :caption
+      row "Embed" do
+        %{<textarea rows="5" cols="60">
+Full Size: <ax:image i=\"#{image.id}\"/>
+300px Thumb: <ax:image i=\"#{image.id}\" size=\"300x\"/>
+150px Thumb: <ax:image i=\"#{image.id}\" size=\"150x\"/>
+150px Square Thumb: <ax:image i=\"#{image.id}\" size=\"150x150#\"/>
+</textarea> <br/>
+<em>Select the ax:image tag of your choice and enter it into your posts to embed this image.</em>}.html_safe
+      end
       row :author
       row :site
       row :created_at
