@@ -45,3 +45,4 @@ gem "newrelic_rpm"                        # New Relic perf and uptime pinging
 gem "rack-cache", :require=>"rack/cache"  # Caching (required by Dragonfly)
 gem "dragonfly", "~>0.9.13"               # Image upload and service
 gem "fog", "~> 1.9.0"                     # S3 File System (used by Dragonfly)
+gem "rmagick", ">= 2.1"                   # RMagick2 image manipulation (used by Dragonfly)

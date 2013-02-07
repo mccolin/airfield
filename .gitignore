@@ -17,3 +17,5 @@
 # Ignore Mac thumbnail caches.
 .DS_Store
 
+# Ignore Dragonfly dev file cache
+/public/system/dragonfly

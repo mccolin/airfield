@@ -8,6 +8,7 @@ class Media < ActiveRecord::Base
   belongs_to :author, :class_name=>"User"
 
   # Attributes:
-  attr_accessible :author_id, :caption, :image_name, :image_uid, :name, :site_id, :type
+  attr_accessible :author_id, :caption, :image_name, :image_uid, :name, :site_id, :type,
+                  :image, :retained_image
 
 end

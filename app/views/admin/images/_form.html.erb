@@ -1,0 +1,26 @@
+<%
+  # AIRFIELD
+  # Admin / Image Form
+-%>
+
+<%= semantic_form_for [:admin, @image], :html=>{:multipart=>true} do |f| %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :retained_image %>
+    <%= link_to(image_tag(@image.image.thumb("150x150").url, :style=>"margin-left:250px;"), @image.image.url, :target=>"_blank") if @image.image_uid %>
+    <%= f.input :image, :as=>:file %>
+
+    <%= f.input :name, :hint=>"(Optional) A descriptive name for the image" %>
+    <%= f.input :caption, :hint=>"A display caption that some templates may display alongside the image" %>
+
+    <hr/>
+
+    <%= f.input :author, :selected=>(@image.author_id || current_user.id), :hint=>"The author/uploader of the image" %>
+    <%= f.input :site, :selected=>(@image.site_id || Site.instance.id), :hint=>"The site to which this image is assigned" %>
+
+  <% end # f.inputs %>
+  <%= f.actions do %>
+    <%= f.action :submit, :label=>"#{@image.new_record? ? 'Create' : 'Update'} Image" %>
+    <%= f.action :cancel, :as=>:link, :label=>"Cancel" %>
+  <% end # f.actions %>
+<% end %>
+
