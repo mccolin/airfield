@@ -66,5 +66,11 @@
 
   <%= javascript_include_tag "application" %>
 
+  <script type="text/javascript">
+    $("#header h1").css("cursor","pointer").click(function(e){
+      document.location.href = "<%=home_path()-%>";
+    });
+  </script>
+
 </body>
 </html>
